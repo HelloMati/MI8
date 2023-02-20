@@ -2,6 +2,8 @@ package com.MI8.MI8.models;
 
 import jakarta.persistence.*;
 
+import javax.naming.Name;
+
 @Entity
 @Table(name = "characters")
 public class PlayerCharacter {
@@ -11,7 +13,7 @@ public class PlayerCharacter {
     private int id;
 
     @Column
-    private String string;
+    private String name;
 
     @OneToOne(mappedBy = "character")
     private Game game;
@@ -21,11 +23,10 @@ public class PlayerCharacter {
     private Inventory inventory;
 
     public PlayerCharacter(String name) {
-        this.string = name;
+        this.name = name;
     }
 
-    public PlayerCharacter() {
-    }
+    public PlayerCharacter(){}
 
     public int getId() {
         return id;
@@ -35,12 +36,12 @@ public class PlayerCharacter {
         this.id = id;
     }
 
-    public String getString() {
-        return string;
+    public String getName() {
+        return name;
     }
 
-    public void setString(String string) {
-        this.string = string;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Game getGame() {
