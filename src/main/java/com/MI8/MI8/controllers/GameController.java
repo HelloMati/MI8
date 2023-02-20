@@ -1,16 +1,41 @@
 package com.MI8.MI8.controllers;
 
+import com.MI8.MI8.models.Game;
+import com.MI8.MI8.repositories.GameRepository;
+import com.MI8.MI8.repositories.PlayerCharacterRepositories;
+import com.MI8.MI8.services.GameServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/game")
 public class GameController {
 
-    
-//    @GetMapping
-//    public ResponseEntity<String> 
+    @Autowired
+    GameServices gameServices;
+
+    @Autowired
+    PlayerCharacterRepositories playerRepo;
+
+    @Autowired
+    GameRepository gameRepo;
+
+    @GetMapping
+    public ResponseEntity<List<Game>> getGame(){
+        return new ResponseEntity<>(gameRepo.findAll(),HttpStatus.FOUND);
+    }
+    @PostMapping(value = "/{player_id}")
+    public ResponseEntity<Game> createNewGame(@PathVariable int player_id ){
+        if (playerRepo.findById(player_id).isPresent()) {
+            Game game = gameServices.makeNewGame(player_id);
+            return new ResponseEntity(game, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
