@@ -1,12 +1,10 @@
 package com.MI8.MI8.services;
 
 import com.MI8.MI8.models.Game;
-import com.MI8.MI8.models.PlayerCharacter;
 import com.MI8.MI8.repositories.GameRepository;
 import com.MI8.MI8.repositories.PlayerCharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 
 @Service
 public class GameServices {

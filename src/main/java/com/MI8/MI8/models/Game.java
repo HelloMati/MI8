@@ -1,5 +1,6 @@
 package com.MI8.MI8.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,16 +12,18 @@ public class Game {
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "character")
-    private PlayerCharacter character;
+    @JoinColumn(name = "player")
+    @JsonIgnoreProperties(value = "game")
+    private Player player;
 
     @OneToOne
     @JoinColumn(name = "currentRoom")
+    @JsonIgnoreProperties(value = "game")
     private Room currentRoom;
 
-    public Game(int id, PlayerCharacter character, Room currentRoom) {
+    public Game(int id, Player character, Room currentRoom) {
         this.id = id;
-        this.character = character;
+        this.player = character;
         this.currentRoom = currentRoom;
     }
 
@@ -35,12 +38,12 @@ public class Game {
         this.id = id;
     }
 
-    public PlayerCharacter getCharacter() {
-        return character;
+    public Player getCharacter() {
+        return player;
     }
 
-    public void setCharacter(PlayerCharacter character) {
-        this.character = character;
+    public void setCharacter(Player character) {
+        this.player = character;
     }
 
     public Room getCurrentRoom() {
