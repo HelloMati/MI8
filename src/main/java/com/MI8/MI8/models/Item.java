@@ -1,5 +1,6 @@
 package com.MI8.MI8.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -20,7 +21,7 @@ public class Item {
     private String itemRarity;
 
     @ManyToMany(mappedBy = "inventory")
-    @JsonIgnoreProperties("item")
+    @JsonIgnore
     private List<Player> player;
 
 

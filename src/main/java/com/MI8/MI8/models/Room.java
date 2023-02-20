@@ -1,5 +1,6 @@
 package com.MI8.MI8.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -17,7 +18,7 @@ public class Room {
     private String RoomDescription;
 
     @OneToOne(mappedBy = "currentRoom")
-    @JsonIgnoreProperties(value = "currentRoom")
+    @JsonIgnore
     private Game game;
 
     public Room(String roomDescription) {

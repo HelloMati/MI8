@@ -2,8 +2,9 @@ package com.MI8.MI8.controllers;
 
 import com.MI8.MI8.models.Game;
 import com.MI8.MI8.repositories.GameRepository;
-import com.MI8.MI8.repositories.PlayerCharacterRepository;
+import com.MI8.MI8.repositories.PlayerRepository;
 import com.MI8.MI8.services.GameServices;
+import com.MI8.MI8.services.PlayerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,10 @@ public class GameController {
 
     @Autowired
     GameServices gameServices;
-
     @Autowired
-    PlayerCharacterRepository playerRepo;
-
+    PlayerServices playerServices;
+    @Autowired
+    PlayerRepository playerRepo;
     @Autowired
     GameRepository gameRepo;
 
@@ -43,6 +44,7 @@ public class GameController {
     public ResponseEntity<Game> createNewGame(@PathVariable int player_id ){
         if (playerRepo.findById(player_id).isPresent()) {
             Game game = gameServices.makeNewGame(player_id);
+            playerRepo.findById(player_id).get().setGame(game);
             return new ResponseEntity(game, HttpStatus.CREATED);
         } else {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);

@@ -13,12 +13,12 @@ public class Game {
 
     @OneToOne
     @JoinColumn(name = "player")
-    @JsonIgnoreProperties(value = "game")
+    @JsonIgnoreProperties({"players"})
     private Player player;
 
     @OneToOne
     @JoinColumn(name = "currentRoom")
-    @JsonIgnoreProperties(value = "game")
+    @JsonIgnoreProperties({"rooms"})
     private Room currentRoom;
 
     public Game(int id, Player character, Room currentRoom) {

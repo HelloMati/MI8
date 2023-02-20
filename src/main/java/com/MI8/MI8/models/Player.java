@@ -1,5 +1,6 @@
 package com.MI8.MI8.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -17,14 +18,14 @@ public class Player {
     private String name;
 
     @OneToOne(mappedBy = "player")
-    @JsonIgnoreProperties(value = "player")
+    @JsonIgnore
     private Game game;
 
     @ManyToMany
     @JoinTable(name = "player_item",
                 joinColumns = @JoinColumn(name = "player_id"),
                 inverseJoinColumns = @JoinColumn(name = "item_id"))
-    @JsonIgnoreProperties("player")
+    @JsonIgnoreProperties({"player"})
     private List<Item> inventory;
 
     public Player(String name) {

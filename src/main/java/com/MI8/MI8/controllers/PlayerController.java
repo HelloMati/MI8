@@ -3,7 +3,6 @@ package com.MI8.MI8.controllers;
 
 import com.MI8.MI8.models.Player;
 import com.MI8.MI8.services.PlayerServices;
-import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

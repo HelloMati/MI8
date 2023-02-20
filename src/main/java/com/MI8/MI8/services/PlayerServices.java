@@ -1,5 +1,6 @@
 package com.MI8.MI8.services;
 
+import com.MI8.MI8.models.Game;
 import com.MI8.MI8.models.Player;
 import com.MI8.MI8.repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +10,17 @@ import org.springframework.stereotype.Service;
 public class PlayerServices {
 
     @Autowired
-    PlayerRepository playerCharacterRepository;
+    PlayerRepository playerRepo;
 
     public Player createPlayerCharacter(String name) {
         Player player = new Player(name);
-        playerCharacterRepository.save(player);
+        playerRepo.save(player);
         return player;
     }
 
-    public Player getCharacter(int id){
-        return playerCharacterRepository.findById(id).get();
+    public Player getCharacter(int id) {
+        return playerRepo.findById(id).get();
     }
+
 
 }

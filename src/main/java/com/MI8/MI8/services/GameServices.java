@@ -2,7 +2,7 @@ package com.MI8.MI8.services;
 
 import com.MI8.MI8.models.Game;
 import com.MI8.MI8.repositories.GameRepository;
-import com.MI8.MI8.repositories.PlayerCharacterRepository;
+import com.MI8.MI8.repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public class GameServices {
     GameRepository gameRepo;
 
     @Autowired
-    PlayerCharacterRepository playerRepo;
+    PlayerRepository playerRepo;
 
     public Game makeNewGame(int player_id){
         Game game = new Game();
