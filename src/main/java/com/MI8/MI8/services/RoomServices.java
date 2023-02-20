@@ -11,6 +11,6 @@ public class RoomServices {
 @Autowired
     RoomRepository roomRepository;
 
-    public Room CheckCurrentRoom
+
 
 }

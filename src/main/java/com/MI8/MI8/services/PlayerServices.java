@@ -17,4 +17,8 @@ public class PlayerServices {
         return player;
     }
 
+    public PlayerCharacter getCharacter(int id){
+        return playerCharacterRepository.findById(id).get();
+    }
+
 }

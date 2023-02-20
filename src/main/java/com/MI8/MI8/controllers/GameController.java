@@ -2,7 +2,8 @@ package com.MI8.MI8.controllers;
 
 import com.MI8.MI8.models.Game;
 import com.MI8.MI8.repositories.GameRepository;
-import com.MI8.MI8.repositories.PlayerCharacterRepositories;
+import com.MI8.MI8.repositories.PlayerCharacterRepository;
+import com.MI8.MI8.repositories.PlayerCharacterRepository;
 import com.MI8.MI8.services.GameServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class GameController {
     GameServices gameServices;
 
     @Autowired
-    PlayerCharacterRepositories playerRepo;
+    PlayerCharacterRepository playerRepo;
 
     @Autowired
     GameRepository gameRepo;

@@ -3,7 +3,7 @@ package com.MI8.MI8.services;
 import com.MI8.MI8.models.Game;
 import com.MI8.MI8.models.PlayerCharacter;
 import com.MI8.MI8.repositories.GameRepository;
-import com.MI8.MI8.repositories.PlayerCharacterRepositories;
+import com.MI8.MI8.repositories.PlayerCharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +15,7 @@ public class GameServices {
     GameRepository gameRepo;
 
     @Autowired
-    PlayerCharacterRepositories playerRepo;
+    PlayerCharacterRepository playerRepo;
 
     public Game makeNewGame(int player_id){
         Game game = new Game();

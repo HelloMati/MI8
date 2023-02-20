@@ -3,6 +3,7 @@ package com.MI8.MI8.controllers;
 
 import com.MI8.MI8.models.PlayerCharacter;
 import com.MI8.MI8.services.PlayerServices;
+import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,5 +21,12 @@ public class PlayerController {
         PlayerCharacter player = playerService.createPlayerCharacter(name);
         return new ResponseEntity(player, HttpStatus.CREATED);
     }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<PlayerCharacter> getCharacter(@PathVariable int id){
+        return new  ResponseEntity<>(playerService.getCharacter(id), HttpStatus.OK);
+    }
+
+
 
 }
