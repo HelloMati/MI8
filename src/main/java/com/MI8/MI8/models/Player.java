@@ -1,12 +1,13 @@
 package com.MI8.MI8.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
-import javax.naming.Name;
+import java.util.List;
 
 @Entity
-@Table(name = "characters")
-public class PlayerCharacter {
+@Table(name = "players")
+public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,18 +16,23 @@ public class PlayerCharacter {
     @Column
     private String name;
 
-    @OneToOne(mappedBy = "character")
+    @OneToOne(mappedBy = "player")
+    @JsonIgnoreProperties(value = "player")
     private Game game;
 
-    @OneToOne
-    @JoinColumn(name = "inventory")
-    private Inventory inventory;
+    @ManyToMany
+    @JoinTable(name = "player_item",
+                joinColumns = @JoinColumn(name = "player_id"),
+                inverseJoinColumns = @JoinColumn(name = "item_id"))
+    @JsonIgnoreProperties("player")
+    private List<Item> inventory;
 
-    public PlayerCharacter(String name) {
+    public Player(String name) {
         this.name = name;
     }
 
-    public PlayerCharacter(){}
+    public Player() {
+    }
 
     public int getId() {
         return id;
@@ -52,11 +58,11 @@ public class PlayerCharacter {
         this.game = game;
     }
 
-    public Inventory getInventory() {
+    public List<Item> getInventory() {
         return inventory;
     }
 
-    public void setInventory(Inventory inventory) {
+    public void setInventory(List<Item> inventory) {
         this.inventory = inventory;
     }
 }

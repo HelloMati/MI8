@@ -1,10 +1,9 @@
 package com.MI8.MI8.models;
 
-import com.MI8.MI8.models.actions.Actions;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "rooms")
@@ -17,18 +16,13 @@ public class Room {
     @Column
     private String RoomDescription;
 
-    @OneToOne
-    @JoinColumn(name = "roomContents")
-    private Inventory roomContents;
-
-//    @Column
-//    private Set<Room> nextRooms;
-//
-//    @Column
-//    private List<Actions> possibleActions;
-
     @OneToOne(mappedBy = "currentRoom")
+    @JsonIgnoreProperties(value = "currentRoom")
     private Game game;
+
+    public Room(String roomDescription) {
+        RoomDescription = roomDescription;
+    }
 
     public Room() {
     }
@@ -47,14 +41,6 @@ public class Room {
 
     public void setRoomDescription(String roomDescription) {
         RoomDescription = roomDescription;
-    }
-
-    public Inventory getRoomContents() {
-        return roomContents;
-    }
-
-    public void setRoomContents(Inventory roomContents) {
-        this.roomContents = roomContents;
     }
 
 

@@ -1,7 +1,7 @@
 package com.MI8.MI8.controllers;
 
 
-import com.MI8.MI8.models.PlayerCharacter;
+import com.MI8.MI8.models.Player;
 import com.MI8.MI8.services.PlayerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +16,8 @@ public class PlayerController {
     PlayerServices playerService;
 
     @PostMapping
-    public ResponseEntity<PlayerCharacter> CreateNewPlayer(@RequestParam String name) {
-        PlayerCharacter player = playerService.createPlayerCharacter(name);
+    public ResponseEntity<Player> CreateNewPlayer(@RequestParam String name) {
+        Player player = playerService.createPlayerCharacter(name);
         return new ResponseEntity(player, HttpStatus.CREATED);
     }
 
