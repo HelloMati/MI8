@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,11 +22,23 @@ public class Room {
     @JsonIgnore
     private Game game;
 
+    @Column
+    private List<Integer> nextRoomIds;
+
     public Room(String roomDescription) {
         RoomDescription = roomDescription;
+        this.nextRoomIds = new ArrayList<>();
     }
 
     public Room() {
+    }
+
+    public List<Integer> getNextRooms() {
+        return nextRoomIds;
+    }
+
+    public void setNextRooms(List<Integer> nextRooms) {
+        this.nextRoomIds = nextRooms;
     }
 
     public int getId() {
