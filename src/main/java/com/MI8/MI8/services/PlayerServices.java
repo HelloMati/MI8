@@ -21,4 +21,8 @@ public class PlayerServices {
         return playerCharacterRepository.findById(id).get();
     }
 
+    public void deletePlayerCharacter(Player player) {
+        playerCharacterRepository.delete(player);
+    }
+
 }
