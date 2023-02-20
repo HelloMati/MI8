@@ -23,7 +23,7 @@ public class PlayerController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<PlayerCharacter> getCharacter(@PathVariable int id){
+    public ResponseEntity<Player> getCharacter(@PathVariable int id){
         return new  ResponseEntity<>(playerService.getCharacter(id), HttpStatus.OK);
     }
 
