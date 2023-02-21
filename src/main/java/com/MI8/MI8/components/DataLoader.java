@@ -1,6 +1,7 @@
 package com.MI8.MI8.components;
 
 import com.MI8.MI8.models.Item;
+import com.MI8.MI8.models.Player;
 import com.MI8.MI8.models.Room;
 import com.MI8.MI8.repositories.GameRepository;
 import com.MI8.MI8.repositories.ItemRepository;
@@ -45,6 +46,15 @@ public class DataLoader implements ApplicationRunner {
                 "/nBy the elevators you see some guards.");
         roomRepo.save(lobby);
 
+        room elevator = new Room("You've made it to the elevator agent " +name+ ". It seems the new owners have denied access to the basement floor. Should you choose you can access it via an old and discreet hatch panel above you. Our previous operatives have "+
+                "ensured this hatch will be loose enough for your access. Alternatively you can access the Security station or head straight for the CEO's Office. choose wisely agent.");
+        room airvents;
+        room security = new Room("Your disguise has enabled you to get this far however be aware agent, you must act swiftly. The security personnel will be on the lookout. We have instigated a scandal on the lower floors to detract their attention." +
+                "retrieve one of the spare keycards and make it quick.");
+        room valut= new Room();
+        room ceosOffice;
+        room ExtractionPoint;
+
         //adding path to the plaza
         roomServices.addRoom(plaza,2);
         roomServices.addRoom(plaza,3);
@@ -54,6 +64,10 @@ public class DataLoader implements ApplicationRunner {
         //items
         Item torch = new Item("This is a torch, you can use it to light up the room","Common");
         itemRepo.save(torch);
+
+        Item keycard = new Item("This keycard allows you to gain access to the CeosOffice.","rare");
+
+
 
     }
 }
