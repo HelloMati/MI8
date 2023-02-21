@@ -8,4 +8,5 @@ public class LookAround extends ActionsProperties implements Actions {
     public LookAround(Player player, Game game) {
         super(player, game);
     }
+
 }
