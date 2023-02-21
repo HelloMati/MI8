@@ -117,7 +117,6 @@ public class DataLoader implements ApplicationRunner {
         //adding path to the Elevator
         roomServices.addRoom(elevator,2);
         roomServices.addRoom(elevator,6);
-        roomServices.addRoom(elevator,8);
         roomRepo.save(elevator);
 
         //adding path to the airvents
@@ -150,7 +149,10 @@ public class DataLoader implements ApplicationRunner {
         itemRepo.save(multiTool);
 
         Item keycard = new Item("keycard","This keycard allows you to gain access to the CeosOffice.","rare");
+        itemService.addRoom(keycard,ceosOffice);
+        itemService.addRoom(keycard,elevator);
         itemRepo.save(keycard);
+
 
         Item laptop = new Item ("laptop","Contains evidence of Specters villainous international operations.", "superRare");
         itemRepo.save(laptop);
