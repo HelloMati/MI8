@@ -24,12 +24,16 @@ public class ItemService {
     @Autowired
     PlayerServices playerServices;
 
+    @Autowired
+    RoomServices roomServices;
+
     //add room an item can be used in
     public void addRoom(Item item, Room room){
         List<Room> nextRooms = item.getRoomCanBeUsedIn();
         nextRooms.add(room);
         item.setRoomCanBeUsedIn(nextRooms);
     }
+
 
     //use item
     //switch to check what the item is
@@ -69,9 +73,13 @@ public class ItemService {
                 case "key":
                     //open a door
                     //remove key
-
+                case "keycard":
+                    roomServices.addRoom(roomIn, 8);
+                    return roomIn;
             }
         }
     return null;
     }
+
+
 }
