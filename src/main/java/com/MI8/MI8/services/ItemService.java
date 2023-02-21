@@ -23,6 +23,8 @@ public class ItemService {
     ItemRepository itemRepo;
     @Autowired
     PlayerServices playerServices;
+    @Autowired
+    RoomServices roomServices;
 
     //add room an item can be used in
     public void addRoom(Item item, Room room){
@@ -57,7 +59,8 @@ public class ItemService {
         //can item be used in room?
         boolean canItemBeUsed = itemToUse.getRoomCanBeUsedIn().contains(roomIn);
         //check player has item
-        if (itemToUse != null && roomIn != null && player != null && canItemBeUsed && areWeInTheRightRoom) {
+        boolean playerHasItem = player.getInventory().contains(itemToUse);
+        if (itemToUse != null && roomIn != null && player != null && canItemBeUsed && areWeInTheRightRoom && playerHasItem) {
             switch (name) {
                 case "torch":
                     //light up room
@@ -66,9 +69,18 @@ public class ItemService {
                     //drop torch
 //                    playerServices.updateInventory(playerId,itemToUse.getId(),false);
                     return roomIn;
-                case "key":
-                    //open a door
-                    //remove key
+                case "multiTool":
+                    //check the room is lit to use
+                    if(roomIn.isLit()) {
+                        //remove screws of vent - adds link from basement to vents
+                        roomServices.addRoom(roomIn, 5);
+                        roomRepo.save(roomIn);
+                        //remove key
+                        playerServices.updateInventory(playerId, itemToUse.getId(), false);
+                        return roomIn;
+                    } else {
+                        return null;
+                    }
 
             }
         }

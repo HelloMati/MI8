@@ -37,7 +37,7 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         //room id 1
-        Room plaza = new Room("You are droped of at the Plaza outside the building. /nIn front of you is the front door",
+        Room plaza = new Room("You are droped of at the Plaza outside the building. \nIn front of you is the front door",
                 "You enter the Plaza, it seems quiet out here",
                 true,
                 "You scope out around the Plaza and find a hatch which appears to lead down into the basement.");
@@ -51,7 +51,7 @@ public class DataLoader implements ApplicationRunner {
         roomRepo.save(basement);
         //room id 3
         Room lobby = new Room("You enter the lobby there is a reception desk with a bored looking receptionist." +
-                "/nBy the elevators you see some guards.",
+                "\nBy the elevators you see some guards.",
                 "You return to the Lobby, nothing has changed in here",
                 true,
                 "You mill around in the lobby, you see the occasional business person come and go, but most have gone home for the night.");
@@ -108,7 +108,6 @@ public class DataLoader implements ApplicationRunner {
         roomRepo.save(plaza);
 
         //adding path to the basement
-        roomServices.addRoom(basement,5);
         roomRepo.save(basement);
 
         //adding path to the Lobby
@@ -147,6 +146,7 @@ public class DataLoader implements ApplicationRunner {
         itemRepo.save(torch);
 
         Item multiTool = new Item("multiTool", "This is a Multi-Tool, you can use it to remove screws","Common");
+        itemService.addRoom(multiTool,basement);
         itemRepo.save(multiTool);
 
         Item keycard = new Item("keycard","This keycard allows you to gain access to the CeosOffice.","rare");
