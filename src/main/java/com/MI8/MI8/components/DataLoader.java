@@ -36,35 +36,46 @@ public class DataLoader implements ApplicationRunner {
 
         //room id 1
         Room plaza = new Room("You are droped of at the Plaza outside the building" +
-                "/nIn front of you is the front door");
+                "/nIn front of you is the front door","You enter the Plaza, it seems quiet out here");
         roomRepo.save(plaza);
         //room id 2
-        Room basement = new Room("You enter the basement, it's very dark in here");
+        Room basement = new Room("You enter the basement, it's very dark in here","This is the basement");
         roomRepo.save(basement);
         //room id 3
         Room lobby = new Room("You enter the lobby there is a reception desk with a bored looking receptionist." +
-                "/nBy the elevators you see some guards.");
+                "/nBy the elevators you see some guards.","You return to the Lobby");
         roomRepo.save(lobby);
         //room id 4
-        Room elevator = new Room("You've made it to the elevator agent. It seems the new owners have denied access to the basement floor. Should you choose you can access it via an old and discreet hatch panel above you. Our previous operatives have "+
-                "ensured this hatch will be loose enough for your access. Alternatively you can access the Security station or head straight for the CEO's Office. choose wisely agent.");
+        Room elevator = new Room("You've made it to the elevator agent. It seems the new owners have denied access to" +
+                " the basement floor. Should you choose you can access it via an old and discreet hatch panel above you. Our previous operatives have "+
+                "ensured this hatch will be loose enough for your access. Alternatively you can access the Security station or head straight " +
+                "for the CEO's Office. choose wisely agent.",
+                "You return to the elevator, you can choose to go to the Lobby, Security Station or the CEOs office");
         roomRepo.save(elevator);
         //room id 5
-        Room airvents = new Room("You slither along the dark and narrow access vents ,avoiding any unwanted attention.");
+        Room airvents = new Room("You slither along the dark and narrow access vents ,avoiding any unwanted attention.",
+                "This is the airvents");
         roomRepo.save(airvents);
         //room id 6
-        Room security = new Room("Your disguise has enabled you to get this far however be aware agent, you must act swiftly. The security personnel will be on the lookout. We have instigated a scandal on the lower floors to detract their attention." +
-                "retrieve one of the spare keycards and make it quick.");
+        Room security = new Room("Your disguise has enabled you to get this far however be aware agent, you must act swiftly." +
+                " The security personnel will be on the lookout. We have instigated a scandal on the lower floors to detract their attention." +
+                "retrieve one of the spare keycards and make it quick.",
+                "You return to the security room, there is nothing left of interest here");
         roomRepo.save(security);
         //room id 7
-        Room vault = new Room("Well done agent, the tracker you have placed on their criminal earnings will allow use to intercept their operation when they least expect it, catching them red handed. we have set up an extraction point. Great work agent.");
+        Room vault = new Room("Well done agent, the tracker you have placed on their criminal earnings will allow use to intercept" +
+                " their operation when they least expect it, catching them red handed. we have set up an extraction point. Great work agent.",
+                "You return to the vault, there is nothing left");
         roomRepo.save(vault);
         //room id 8
-        Room ceosOffice = new Room("Quickly agent, access the computer and retrieve the laptop. We need the documents within as evidence of Specter's unscrupulous and opportunistic dealings. we have set up an extraction point. Great work agent.");
+        Room ceosOffice = new Room("Quickly agent, access the computer and retrieve the laptop. We need the documents within as evidence of Specter's" +
+                " unscrupulous and opportunistic dealings. we have set up an extraction point. Great work agent.",
+                "You return to the ceo's office, looks like it won't be needed soon!");
         roomRepo.save(ceosOffice);
         //room id 9
-        Room extractionPoint = new Room("You have successfully managed to cripple Specters growing criminal influence across the globe, whilst they remain at large, your accomplishments will get us one step closer to stopping their nefarious affairs. youll be" +
-                "returning to MI8 HQ for your next briefing agent.");
+        Room extractionPoint = new Room("You have successfully managed to cripple Specters growing criminal influence across the globe, whilst they remain at large," +
+                " your accomplishments will get us one step closer to stopping their nefarious affairs. youll be" +
+                "returning to MI8 HQ for your next briefing agent.","");
 
         //adding path to the plaza
         roomServices.addRoom(plaza,2);

@@ -17,7 +17,11 @@ public class Room {
     private int id;
 
     @Column(length = 512)
+    private String firstEntranceMessage;
+    @Column
     private String RoomDescription;
+    @Column
+    private Boolean haveEnteredRoom;
 
     @OneToOne(mappedBy = "currentRoom")
     @JsonIgnore
@@ -26,8 +30,9 @@ public class Room {
     @Column
     private List<Integer> nextRoomIds;
 
-    public Room(String roomDescription) {
+    public Room(String firstEntranceMessage,String roomDescription) {
         RoomDescription = roomDescription;
+        this.firstEntranceMessage = firstEntranceMessage;
         this.nextRoomIds = new ArrayList<>();
     }
 
@@ -65,5 +70,29 @@ public class Room {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public String getFirstEntranceMessage() {
+        return firstEntranceMessage;
+    }
+
+    public void setFirstEntranceMessage(String firstEntranceMessage) {
+        this.firstEntranceMessage = firstEntranceMessage;
+    }
+
+    public Boolean getHaveEnteredRoom() {
+        return haveEnteredRoom;
+    }
+
+    public void setHaveEnteredRoom(Boolean haveEnteredRoom) {
+        this.haveEnteredRoom = haveEnteredRoom;
+    }
+
+    public List<Integer> getNextRoomIds() {
+        return nextRoomIds;
+    }
+
+    public void setNextRoomIds(List<Integer> nextRoomIds) {
+        this.nextRoomIds = nextRoomIds;
     }
 }
