@@ -7,6 +7,7 @@ import com.MI8.MI8.repositories.PlayerRepository;
 import com.MI8.MI8.repositories.RoomRepository;
 import com.MI8.MI8.services.GameServices;
 import com.MI8.MI8.services.PlayerServices;
+import com.MI8.MI8.services.RoomServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,8 @@ public class GameController {
     GameServices gameServices;
     @Autowired
     PlayerServices playerServices;
+    @Autowired
+    RoomServices roomServices;
     @Autowired
     PlayerRepository playerRepo;
     @Autowired
@@ -49,12 +52,11 @@ public class GameController {
     @PostMapping(value = "/{player_id}")
     public ResponseEntity<Game> createNewGame(@PathVariable int player_id ){
         if (playerRepo.findById(player_id).isPresent() && !playerRepo.findById(player_id).get().isStartedGame()) {
-            Game game = gameServices.makeNewGame(player_id);
-            playerRepo.findById(player_id).get().setGame(game);
-            playerRepo.findById(player_id).get().setStartedGame(true);
-            return new ResponseEntity(game, HttpStatus.CREATED);
+            return new ResponseEntity(gameServices.makeNewGame(player_id), HttpStatus.CREATED);
+        } else if(playerRepo.findById(player_id).get().isStartedGame()) {
+            return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -73,11 +75,10 @@ public class GameController {
     @PatchMapping(value = "/{id}")
     public ResponseEntity<Room> moveRoom(@PathVariable int id,
                                          @RequestParam int roomId){
-        if (roomRepo.findById(roomId).isPresent() && gameRepo.findById(id).isPresent()){
-            gameRepo.findById(id).get().setCurrentRoom(roomRepo.findById(roomId).get());
-            return new ResponseEntity<>(roomRepo.findById(roomId).get(),HttpStatus.OK);
+        if (roomServices.canMoveToRoom(id,roomId)){
+            return new ResponseEntity<>(gameServices.updateRoom(id,roomId),HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
