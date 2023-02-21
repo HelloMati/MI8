@@ -63,13 +63,45 @@ public class DataLoader implements ApplicationRunner {
         Room ceosOffice = new Room("Quickly agent, access the computer and retrieve the laptop. We need the documents within as evidence of Specter's unscrupulous and opportunistic dealings. we have set up an extraction point. Great work agent.");
         roomRepo.save(ceosOffice);
         //room id 9
-        Room ExtractionPoint = new Room("You have successfully managed to cripple Specters growing criminal influence across the globe, whilst they remain at large, your accomplishments will get us one step closer to stopping their nefarious affairs. youll be" +
+        Room extractionPoint = new Room("You have successfully managed to cripple Specters growing criminal influence across the globe, whilst they remain at large, your accomplishments will get us one step closer to stopping their nefarious affairs. youll be" +
                 "returning to MI8 HQ for your next briefing agent.");
 
         //adding path to the plaza
         roomServices.addRoom(plaza,2);
         roomServices.addRoom(plaza,3);
         roomRepo.save(plaza);
+
+        //adding path to the basement
+        roomServices.addRoom(basement,5);
+        roomRepo.save(basement);
+
+        //adding path to the Lobby
+        roomServices.addRoom(lobby,4);
+        roomRepo.save(lobby);
+
+        //adding path to the Elevator
+        roomServices.addRoom(elevator,2);
+        roomServices.addRoom(elevator,6);
+        roomServices.addRoom(elevator,8);
+        roomRepo.save(elevator);
+
+        //adding path to the airvents
+        roomServices.addRoom(airvents,7);
+        roomRepo.save(airvents);
+
+        //adding path to the vaults
+        roomServices.addRoom(extractionPoint,9);
+        roomRepo.save(vault);
+
+        //adding path to the security
+        roomServices.addRoom(security,4);
+        roomRepo.save(security);
+
+        //adding path to the ceosOffice
+        roomServices.addRoom(extractionPoint,9);
+        roomServices.addRoom(security,4);
+        roomRepo.save(ceosOffice);
+
 
 
         //items
