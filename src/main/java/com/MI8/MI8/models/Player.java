@@ -28,6 +28,9 @@ public class Player {
     @JsonIgnoreProperties({"player"})
     private List<Item> inventory;
 
+    @Column
+    private boolean startedGame;
+
     public Player(String name) {
         this.name = name;
     }
@@ -65,5 +68,13 @@ public class Player {
 
     public void setInventory(List<Item> inventory) {
         this.inventory = inventory;
+    }
+
+    public boolean isStartedGame() {
+        return startedGame;
+    }
+
+    public void setStartedGame(boolean startedGame) {
+        this.startedGame = startedGame;
     }
 }

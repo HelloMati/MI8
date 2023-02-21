@@ -1,7 +1,9 @@
 package com.MI8.MI8.components;
 
+import com.MI8.MI8.models.Item;
 import com.MI8.MI8.models.Room;
 import com.MI8.MI8.repositories.GameRepository;
+import com.MI8.MI8.repositories.ItemRepository;
 import com.MI8.MI8.repositories.PlayerRepository;
 import com.MI8.MI8.repositories.RoomRepository;
 import com.MI8.MI8.services.RoomServices;
@@ -19,6 +21,9 @@ public class DataLoader implements ApplicationRunner {
     PlayerRepository playerRepo;
     @Autowired
     RoomRepository roomRepo;
+    @Autowired
+    ItemRepository itemRepo;
+
     @Autowired
     RoomServices roomServices;
 
@@ -39,9 +44,16 @@ public class DataLoader implements ApplicationRunner {
         Room lobby = new Room("You enter the lobby there is a reception desk with a bored looking receptionist." +
                 "/nBy the elevators you see some guards.");
         roomRepo.save(lobby);
+
+        //adding path to the plaza
         roomServices.addRoom(plaza,2);
         roomServices.addRoom(plaza,3);
         roomRepo.save(plaza);
+
+
+        //items
+        Item torch = new Item("This is a torch, you can use it to light up the room","Common");
+        itemRepo.save(torch);
 
     }
 }
