@@ -22,6 +22,8 @@ public class Room {
     private String RoomDescription;
     @Column
     private Boolean haveEnteredRoom;
+    @Column
+    private String searchRoomMessage;
 
     @OneToOne(mappedBy = "currentRoom")
     @JsonIgnore
@@ -37,8 +39,9 @@ public class Room {
     @JsonIgnore
     private List<Item> itemsCanBeUsedHere;
 
-    public Room(String firstEntranceMessage,String roomDescription,boolean lit) {
+    public Room(String firstEntranceMessage,String roomDescription,boolean lit,String searchRoomMessage) {
         RoomDescription = roomDescription;
+        this.searchRoomMessage = searchRoomMessage;
         this.firstEntranceMessage = firstEntranceMessage;
         this.nextRoomIds = new ArrayList<>();
         this.lit = lit;
@@ -119,5 +122,13 @@ public class Room {
 
     public void setItemsCanBeUsedHere(List<Item> itemsCanBeUsedHere) {
         this.itemsCanBeUsedHere = itemsCanBeUsedHere;
+    }
+
+    public String getSearchRoomMessage() {
+        return searchRoomMessage;
+    }
+
+    public void setSearchRoomMessage(String searchRoomMessage) {
+        this.searchRoomMessage = searchRoomMessage;
     }
 }

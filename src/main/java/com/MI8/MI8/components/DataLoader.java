@@ -141,6 +141,11 @@ public class DataLoader implements ApplicationRunner {
         Item laptop = new Item ("laptop","Contains evidence of Specters villainous international operations.", "superRare");
         itemRepo.save(laptop);
 
+        Item eyes = new Item("eyes","these are your eyes, you ues them to look around.","Common");
+        itemService.addRoom(eyes,plaza);
+        itemService.addRoom(eyes,basement);
+        itemService.addRoom(eyes,airvents);
+
 
 
     }

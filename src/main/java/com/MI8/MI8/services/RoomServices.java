@@ -32,7 +32,9 @@ public class RoomServices {
         if (gameRepo.findById(gameId).isPresent()&& roomRepository.findById(roomId).isPresent()) {
             Game game = gameRepo.findById(gameId).get();
             Room roomToMoveTo = roomRepository.findById(roomId).get();
-            return game.getCurrentRoom().getNextRooms().contains(roomToMoveTo.getId());
+            if(game.getCurrentRoom().isLit()) {
+                return game.getCurrentRoom().getNextRooms().contains(roomToMoveTo.getId());
+            }
         }
         return false;
     }
