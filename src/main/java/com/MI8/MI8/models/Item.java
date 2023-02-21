@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -40,6 +41,7 @@ public class Item {
         this.name = name;
         this.description = description;
         this.itemRarity = itemRarity;
+        this.roomCanBeUsedIn = new ArrayList<>();
     }
 
     public Item() {

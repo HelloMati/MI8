@@ -42,6 +42,7 @@ public class Room {
         this.firstEntranceMessage = firstEntranceMessage;
         this.nextRoomIds = new ArrayList<>();
         this.lit = lit;
+        this.haveEnteredRoom = false;
     }
 
     public Room() {

@@ -129,6 +129,7 @@ public class DataLoader implements ApplicationRunner {
         //items
         Item torch = new Item("torch","This is a torch, you can use it to light up the room","Common");
         itemService.addRoom(torch,basement);
+        itemService.addRoom(torch,airvents);
         itemRepo.save(torch);
 
         Item multiTool = new Item("multiTool", "This is a Multi-Tool, you can use it to remove screws","Common");
