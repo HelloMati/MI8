@@ -81,22 +81,26 @@ public class DataLoader implements ApplicationRunner {
                 "You retrieve the keycard as the guards quickly rush down to sort out all of the commotion on the ground floor.");
         roomRepo.save(security);
         //room id 7
-        Room vaucitlt = new Room("Well done agent, the tracker you have placed on their criminal earnings will allow use to intercept" +
-                " their operation when they least expect it, catching them red handed. we have set up an extraction point. Great work agent.",
+        Room vault = new Room("Well done agent, the tracker you have placed on their criminal earnings will allow use to intercept" +
+                " their operation when they least expect it, catching them red handed. We have set up an extraction point. Great work agent.",
                 "You return to the vault, there is nothing left",
-                true);
+                true,
+                "You scope out the vault and notice an escape route");
         roomRepo.save(vault);
         //room id 8
         Room ceosOffice = new Room("Quickly agent, access the computer and retrieve the laptop. We need the documents within as evidence of Specter's" +
                 " unscrupulous and opportunistic dealings. we have set up an extraction point. Great work agent.",
-                "You return to the ceo's office, looks like it won't be needed soon!",
-                true);
+                "You return to the ceo's office. There is a gold statue and large painting of the CEO behind a grand desk. This looks rather extravagant.",
+                true,
+                "You spot the computer on the CEO's desk. You access top secret files that will take down Spectre's criminal enterprise and take the laptop with you");
         roomRepo.save(ceosOffice);
         //room id 9
-        Room extractionPoint = new Room("You have successfully managed to cripple Specters growing criminal influence across the globe, whilst they remain at large," +
-                " your accomplishments will get us one step closer to stopping their nefarious affairs. youll be" +
-                "returning to MI8 HQ for your next briefing agent.","",
-                true);
+        Room extractionPoint = new Room("You have successfully managed to cripple Specter's growing criminal influence across the globe, whilst they remain at large," +
+                " your accomplishments will get us one step closer to stopping their nefarious affairs. you'll be" +
+                "returning to MI8 HQ for your next briefing agent.",
+                "This is the roof top of the Plaza. It has a helicopter pad",
+                true,
+                "You hear the helicopter which arrives to airlift you back to MI8 HQ");
 
         //adding path to the plaza
         roomServices.addRoom(plaza,2);
