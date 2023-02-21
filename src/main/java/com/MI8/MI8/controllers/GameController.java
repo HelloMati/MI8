@@ -49,12 +49,11 @@ public class GameController {
     @PostMapping(value = "/{player_id}")
     public ResponseEntity<Game> createNewGame(@PathVariable int player_id ){
         if (playerRepo.findById(player_id).isPresent() && !playerRepo.findById(player_id).get().isStartedGame()) {
-            Game game = gameServices.makeNewGame(player_id);
-            playerRepo.findById(player_id).get().setGame(game);
-            playerRepo.findById(player_id).get().setStartedGame(true);
-            return new ResponseEntity(game, HttpStatus.CREATED);
+            return new ResponseEntity(gameServices.makeNewGame(player_id), HttpStatus.CREATED);
+        } else if(playerRepo.findById(player_id).get().isStartedGame()) {
+            return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -74,8 +73,7 @@ public class GameController {
     public ResponseEntity<Room> moveRoom(@PathVariable int id,
                                          @RequestParam int roomId){
         if (roomRepo.findById(roomId).isPresent() && gameRepo.findById(id).isPresent()){
-            gameRepo.findById(id).get().setCurrentRoom(roomRepo.findById(roomId).get());
-            return new ResponseEntity<>(roomRepo.findById(roomId).get(),HttpStatus.OK);
+            return new ResponseEntity<>(gameServices.updateRoom(id,roomId),HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
