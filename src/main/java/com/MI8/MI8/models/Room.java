@@ -3,6 +3,7 @@ package com.MI8.MI8.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.hibernate.type.descriptor.jdbc.NVarcharJdbcType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(length = 512)
     private String RoomDescription;
 
     @OneToOne(mappedBy = "currentRoom")
