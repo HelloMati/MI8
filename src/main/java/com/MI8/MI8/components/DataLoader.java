@@ -61,20 +61,24 @@ public class DataLoader implements ApplicationRunner {
                 " the basement floor. Should you choose you can access it via an old and discreet hatch panel above you. Our previous operatives have "+
                 "ensured this hatch will be loose enough for your access. Alternatively you can access the Security station or head straight " +
                 "for the CEO's Office. choose wisely agent.",
-                "You return to the elevator, you can choose to go to the Lobby, Security Station or the CEOs office",
-                true);
+                "You return to the elevator, you can choose to go to the Lobby, Security Station or the CEO's office",
+                true,"The calming decor and soothing music doesn't seem to do much for your nerves agent, you see nothing of use besides the floor numbers" +
+                "it would be wise to either use the elevator hatch, or proceed to the security station, or CEO's office.");
         roomRepo.save(elevator);
         //room id 5
         Room airvents = new Room("You slither along the dark and narrow access vents ,avoiding any unwanted attention.",
-                "This is the airvents",
-                true);
+                "These are the airvents",
+                true,
+                "You navigate the vents and narrowly avoid a deadly fall into the large industrial fans. you keep your cool.You overhear hints and suggestions of " +
+                        "further plotting ahead from some of the night-crew.");
         roomRepo.save(airvents);
         //room id 6
         Room security = new Room("Your disguise has enabled you to get this far however be aware agent, you must act swiftly." +
                 " The security personnel will be on the lookout. We have instigated a scandal on the lower floors to detract their attention." +
                 "retrieve one of the spare keycards and make it quick.",
                 "You return to the security room, there is nothing left of interest here",
-                true);
+                true,
+                "You retrieve the keycard as the guards quickly rush down to sort out all of the commotion on the ground floor.");
         roomRepo.save(security);
         //room id 7
         Room vaucitlt = new Room("Well done agent, the tracker you have placed on their criminal earnings will allow use to intercept" +
