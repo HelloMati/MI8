@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping(value = "/player")
 public class PlayerController {
@@ -35,5 +37,15 @@ public class PlayerController {
     public ResponseEntity<Void> deletePlayer(@PathVariable int id) {
         playerService.deletePlayer(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    //handle items
+    //add an item true for add, false for remove
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Player> pickUpItem(@PathVariable int id,
+                                       @RequestParam int itemId,
+                                       @RequestParam Boolean addOrRemove){
+        Player player = playerService.updateInventory(id,itemId,addOrRemove);
+        return player != null ? new ResponseEntity<>(player,HttpStatus.OK):
+                    new ResponseEntity<>(player,HttpStatus.NOT_FOUND);
     }
 }
