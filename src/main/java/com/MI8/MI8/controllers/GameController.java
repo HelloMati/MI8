@@ -7,6 +7,7 @@ import com.MI8.MI8.repositories.PlayerRepository;
 import com.MI8.MI8.repositories.RoomRepository;
 import com.MI8.MI8.services.GameServices;
 import com.MI8.MI8.services.PlayerServices;
+import com.MI8.MI8.services.RoomServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,8 @@ public class GameController {
     GameServices gameServices;
     @Autowired
     PlayerServices playerServices;
+    @Autowired
+    RoomServices roomServices;
     @Autowired
     PlayerRepository playerRepo;
     @Autowired
@@ -72,10 +75,10 @@ public class GameController {
     @PatchMapping(value = "/{id}")
     public ResponseEntity<Room> moveRoom(@PathVariable int id,
                                          @RequestParam int roomId){
-        if (roomRepo.findById(roomId).isPresent() && gameRepo.findById(id).isPresent()){
+        if (roomServices.canMoveToRoom(id,roomId)){
             return new ResponseEntity<>(gameServices.updateRoom(id,roomId),HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
