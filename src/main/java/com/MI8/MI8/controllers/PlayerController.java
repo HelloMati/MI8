@@ -26,6 +26,21 @@ public class PlayerController {
         return new  ResponseEntity<>(playerService.getCharacter(id), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Player> getPlayerId(@PathVariable int id){
+        Player player = playerService.getPlayerId(id);
+        return new ResponseEntity<>(player, HttpStatus.OK);
+    }
 
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Player> updatePlayer(@PathVariable int id, @RequestParam Player player){
+        Player updatedPlayer = playerService.updatePlayer(id, player);
+        return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
+    }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity deletePlayer(@PathVariable int id){
+        playerService.deletePlayer(id);
+        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    }
 }
