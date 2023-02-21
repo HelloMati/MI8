@@ -1,5 +1,7 @@
 package com.MI8.MI8.models;
 
+import com.MI8.MI8.models.Player;
+import com.MI8.MI8.models.Room;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -12,20 +14,30 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    protected int id;
+    @Column
+    protected String name;
 
     @Column
-    private String description;
+    protected String description;
 
     @Column
-    private String itemRarity;
+    protected String itemRarity;
 
     @ManyToMany(mappedBy = "inventory")
     @JsonIgnore
-    private List<Player> player;
+    protected List<Player> player;
+
+    @ManyToMany
+    @JoinTable(name = "items_rooms",
+                joinColumns = @JoinColumn(name = "room_id"),
+                inverseJoinColumns = @JoinColumn(name = "item_id"))
+    @JsonIgnore
+    protected List<Room> roomCanBeUsedIn;
 
 
-    public Item(String description, String itemRarity) {
+    public Item(String name,String description, String itemRarity) {
+        this.name = name;
         this.description = description;
         this.itemRarity = itemRarity;
     }
@@ -33,19 +45,20 @@ public class Item {
     public Item() {
     }
 
-    public List<Player> getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(List<Player> player) {
-        this.player = player;
-    }
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getItemName() {
+        return name;
+    }
+
+    public void setItemName(String itemName) {
+        this.name = itemName;
     }
 
     public String getDescription() {
@@ -64,4 +77,19 @@ public class Item {
         this.itemRarity = itemRarity;
     }
 
+    public List<Player> getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(List<Player> player) {
+        this.player = player;
+    }
+
+    public List<Room> getRoomCanBeUsedIn() {
+        return roomCanBeUsedIn;
+    }
+
+    public void setRoomCanBeUsedIn(List<Room> roomCanBeUsedIn) {
+        this.roomCanBeUsedIn = roomCanBeUsedIn;
+    }
 }

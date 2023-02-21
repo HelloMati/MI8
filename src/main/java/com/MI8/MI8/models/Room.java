@@ -30,10 +30,18 @@ public class Room {
     @Column
     private List<Integer> nextRoomIds;
 
-    public Room(String firstEntranceMessage,String roomDescription) {
+    @Column
+    private boolean lit;
+
+    @ManyToMany(mappedBy = "roomCanBeUsedIn")
+    @JsonIgnore
+    private List<Item> itemsCanBeUsedHere;
+
+    public Room(String firstEntranceMessage,String roomDescription,boolean lit) {
         RoomDescription = roomDescription;
         this.firstEntranceMessage = firstEntranceMessage;
         this.nextRoomIds = new ArrayList<>();
+        this.lit = lit;
     }
 
     public Room() {
@@ -94,5 +102,21 @@ public class Room {
 
     public void setNextRoomIds(List<Integer> nextRoomIds) {
         this.nextRoomIds = nextRoomIds;
+    }
+
+    public boolean isLit() {
+        return lit;
+    }
+
+    public void setLit(boolean lit) {
+        this.lit = lit;
+    }
+
+    public List<Item> getItemsCanBeUsedHere() {
+        return itemsCanBeUsedHere;
+    }
+
+    public void setItemsCanBeUsedHere(List<Item> itemsCanBeUsedHere) {
+        this.itemsCanBeUsedHere = itemsCanBeUsedHere;
     }
 }
