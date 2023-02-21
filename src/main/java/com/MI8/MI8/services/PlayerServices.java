@@ -23,7 +23,7 @@ public class PlayerServices {
     }
 
     public void deletePlayerCharacter(Player player) {
-        playerCharacterRepository.delete(player);
+        playerRepo.delete(player);
     }
 
 }

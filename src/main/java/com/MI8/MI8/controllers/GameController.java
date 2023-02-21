@@ -40,6 +40,7 @@ public class GameController {
             return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
         }
     }
+    //creates a game which is tied to a player Id
     @PostMapping(value = "/{player_id}")
     public ResponseEntity<Game> createNewGame(@PathVariable int player_id ){
         if (playerRepo.findById(player_id).isPresent()) {
@@ -48,6 +49,17 @@ public class GameController {
             return new ResponseEntity(game, HttpStatus.CREATED);
         } else {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    //deletes a game
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteGame(@PathVariable int id){
+        if (gameRepo.findById(id).isPresent()){
+            gameRepo.deleteById(id);
+            return new ResponseEntity<>("Game with "+ id + " deleted.", HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity<>("Game not found",HttpStatus.NOT_FOUND);
         }
     }
 
