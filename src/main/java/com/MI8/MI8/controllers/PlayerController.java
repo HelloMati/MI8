@@ -19,6 +19,7 @@ public class PlayerController {
     @PostMapping
     public ResponseEntity<Player> createNewPlayer(@RequestParam String name) {
         Player player = playerService.createPlayerCharacter(name);
+        playerService.updateInventory(player.getId(), 5, true);
         return new ResponseEntity<>(player, HttpStatus.CREATED);
     }
 
