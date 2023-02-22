@@ -49,4 +49,10 @@ public class GameServices {
             return new ResponseEntity<>(roomEntering.getFirstEntranceMessage(), HttpStatus.OK);
         }
     }
+    public ResponseEntity<Boolean> hasPlayerWon(int gameId) {
+        Game currentGame = ...
+        return new ResponseEntity<>(currentGame.isPlayerHasWon(), HttpStatus.OK);
+    }
+
+
 }
