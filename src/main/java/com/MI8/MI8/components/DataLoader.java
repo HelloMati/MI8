@@ -63,7 +63,7 @@ public class DataLoader implements ApplicationRunner {
         Room elevator = new Room("elevator",
                 "You've made it to the elevator agent. It seems the new owners have denied access to" +
                 " the basement floor. Should you choose you can access it via an old and discreet hatch panel above you. Our previous operatives have "+
-                "ensured this hatch will be loose enough for your access. Alternatively you can access the Security station or head straight " +
+                "ensured this hatch will be loose enough for your access. Alternatively, you can access the Security station or head straight " +
                 "for the CEO's Office. choose wisely agent.",
                 "You return to the elevator, you can choose to go to the Lobby, Security Station or the CEO's office",
                 true,
