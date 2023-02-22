@@ -37,18 +37,24 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         //room id 1
-        Room plaza = new Room("You are droped of at the Plaza outside the building" +
-                "/nIn front of you is the front door","You enter the Plaza, it seems quiet out here",
-                true);
+        Room plaza = new Room("You are droped of at the Plaza outside the building. \nIn front of you is the front door",
+                "You enter the Plaza, it seems quiet out here",
+                true,
+                "You scope out around the Plaza and find a hatch which appears to lead down into the basement.");
         roomRepo.save(plaza);
         //room id 2
-        Room basement = new Room("You enter the basement, it's very dark in here","This is the basement",
-                false);
+        Room basement = new Room("You enter the basement, it's very dark in here",
+                "This is the basement",
+                false,
+                "You quickly search the basement and find a multi-tool in a nearby toolbox, on the wall up high is a " +
+                        "grate leading to the building's air-conditioning system.");
         roomRepo.save(basement);
         //room id 3
         Room lobby = new Room("You enter the lobby there is a reception desk with a bored looking receptionist." +
-                "/nBy the elevators you see some guards.","You return to the Lobby",
-                true);
+                "\nBy the elevators you see some guards.",
+                "You return to the Lobby, nothing has changed in here",
+                true,
+                "You mill around in the lobby, you see the occasional business person come and go, but most have gone home for the night.");
         roomRepo.save(lobby);
         //room id 4
         Room elevator = new Room("You've made it to the elevator agent. It seems the new owners have denied access to" +
@@ -102,7 +108,6 @@ public class DataLoader implements ApplicationRunner {
         roomRepo.save(plaza);
 
         //adding path to the basement
-        roomServices.addRoom(basement,5);
         roomRepo.save(basement);
 
         //adding path to the Lobby
@@ -112,7 +117,6 @@ public class DataLoader implements ApplicationRunner {
         //adding path to the Elevator
         roomServices.addRoom(elevator,2);
         roomServices.addRoom(elevator,6);
-        roomServices.addRoom(elevator,8);
         roomRepo.save(elevator);
 
         //adding path to the airvents
@@ -141,10 +145,14 @@ public class DataLoader implements ApplicationRunner {
         itemRepo.save(torch);
 
         Item multiTool = new Item("multiTool", "This is a Multi-Tool, you can use it to remove screws","Common");
+        itemService.addRoom(multiTool,basement);
         itemRepo.save(multiTool);
 
         Item keycard = new Item("keycard","This keycard allows you to gain access to the CeosOffice.","rare");
+        itemService.addRoom(keycard,ceosOffice);
+        itemService.addRoom(keycard,elevator);
         itemRepo.save(keycard);
+
 
         Item laptop = new Item ("laptop","Contains evidence of Specters villainous international operations.", "superRare");
         itemRepo.save(laptop);
