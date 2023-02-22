@@ -70,17 +70,12 @@ public class ItemService {
                     //drop torch
 //                    playerServices.updateInventory(playerId,itemToUse.getId(),false);
                     return roomIn;
-<<<<<<< HEAD
-                case "key":
-                    //open a door
-                    //remove key
                 case "eyes":
                     //scans room
                     roomServices.addRoom(roomIn, 1);
                     roomServices.addRoom(roomIn, 2);
                     roomServices.addRoom(roomIn, 5);
                     return roomIn;
-=======
                 case "multiTool":
                     //check the room is lit to use
                     if(roomIn.isLit()) {
@@ -96,8 +91,6 @@ public class ItemService {
                 case "keycard":
                     roomServices.addRoom(roomIn, 8);
                     return roomIn;
-
->>>>>>> 5d977e1629ca826cdbf7e3de20c1721bc4adc080
             }
         }
     return null;
