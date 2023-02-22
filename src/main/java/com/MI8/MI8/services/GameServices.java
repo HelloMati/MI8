@@ -57,8 +57,8 @@ public class GameServices {
 
     public void winningCondition (Game game){
         if (game.getCurrentRoom().getRoomName().equals("extraction") && (
-                game.getCharacter().getInventory().contains(itemRepository.findByName("laptop"))
-        || game.getCharacter().getInventory().contains(itemRepository.findByName("tracker")))){
+                game.getCharacter().getInventory().contains(itemRepository.findByName("laptop").get())
+        || game.getCharacter().getInventory().contains(itemRepository.findByName("tracker").get()))){
             game.setPlayerHasWon(true);
         }
     }
