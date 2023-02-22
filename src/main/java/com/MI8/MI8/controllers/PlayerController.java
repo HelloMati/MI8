@@ -35,8 +35,8 @@ public class PlayerController {
         return playerService.getCharacter(id);
     }
 
-    @PostMapping
-    public ResponseEntity<String> createNewPlayer(@RequestParam String name) {
+    @PostMapping(value = "/{name}")
+    public ResponseEntity<String> createNewPlayer(@PathVariable String name) {
         Player player = playerService.createPlayerCharacter(name);
         playerService.updateInventory(player.getId(), "eyes", true);
         return new ResponseEntity<>("Good evening agent " + player.getName() + ". Your destination will be in Singapore," +
@@ -48,9 +48,9 @@ public class PlayerController {
 
 
     //Use item seems more logical coming from the player
-    @PatchMapping(value = "/{playerId}")
+    @PatchMapping(value = "/{playerId}/{itemName}")
     public ResponseEntity<ReplyDTO> useItem(@PathVariable int playerId,
-                                            @RequestParam String itemName) {
+                                            @PathVariable String itemName) {
         return itemService.useItem(playerId, itemName);
     }
 
