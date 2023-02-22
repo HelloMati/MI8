@@ -131,4 +131,5 @@ public class Room {
     public void setSearchRoomMessage(String searchRoomMessage) {
         this.searchRoomMessage = searchRoomMessage;
     }
+
 }

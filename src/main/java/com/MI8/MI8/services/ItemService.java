@@ -69,7 +69,12 @@ public class ItemService {
                 case "key":
                     //open a door
                     //remove key
-
+                case "eyes":
+                    //scans room
+                    roomServices.addRoom(roomIn, 1);
+                    roomServices.addRoom(roomIn, 2);
+                    roomServices.addRoom(roomIn, 5);
+                    return roomIn;
             }
         }
     return null;
