@@ -8,6 +8,16 @@ public class ReplyDTO {
     private List<String> roomsYouCanEnter;
     private List<String> inventory;
 
+    public ReplyDTO(String reply, List<String> roomsYouCanEnter, List<String> inventory) {
+        this.reply = reply;
+        this.roomsYouCanEnter = roomsYouCanEnter;
+        this.inventory = inventory;
+    }
+
+    public ReplyDTO(String reply) {
+        this.reply = reply;
+    }
+
     public ReplyDTO() {
     }
 
