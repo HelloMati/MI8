@@ -35,15 +35,17 @@ public class GameServices {
     }
 
     //updates room for a game
-    public ResponseEntity<String> updateRoom(int gameId, int roomId){
-        Game gameToUpdate = gameRepo.findById(gameId).get();
-        Room roomToUpdate = roomRepo.findById(roomId).get();
-        gameToUpdate.setCurrentRoom(roomToUpdate);
-        gameRepo.save(gameToUpdate);
-        if (roomToUpdate.getHaveEnteredRoom()){
-            return new ResponseEntity<>(roomToUpdate.getRoomDescription(), HttpStatus.OK);
+    public ResponseEntity<String> enterRoom(int gameId, String room){
+        Game currentGame = gameRepo.findById(gameId).get();
+        Room roomEntering = roomRepo.findByRoomName(room).get();
+        currentGame.setCurrentRoom(roomEntering);
+        gameRepo.save(currentGame);
+        if (roomEntering.getHaveEnteredRoom()){
+            return new ResponseEntity<>(roomEntering.getRoomDescription(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(roomToUpdate.getFirstEntranceMessage(), HttpStatus.OK);
+            roomEntering.setHaveEnteredRoom(true);
+            roomRepo.save(roomEntering);
+            return new ResponseEntity<>(roomEntering.getFirstEntranceMessage(), HttpStatus.OK);
         }
     }
 }

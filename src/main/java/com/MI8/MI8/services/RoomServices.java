@@ -29,12 +29,12 @@ public class RoomServices {
     }
 
     //check if you can move to the selected room
-    public boolean canMoveToRoom(int gameId,int roomId){
-        if (gameRepo.findById(gameId).isPresent()&& roomRepository.findById(roomId).isPresent()) {
+    public boolean canMoveToRoom(int gameId,String room){
+        //check game and room exist
+        if (gameRepo.findById(gameId).isPresent()&& roomRepository.findByRoomName(room).isPresent()) {
             Game game = gameRepo.findById(gameId).get();
-            Room roomToMoveTo = roomRepository.findById(roomId).get();
             if(game.getCurrentRoom().isLit()) {
-                return game.getCurrentRoom().getNextRooms().contains(roomToMoveTo.getId());
+                return game.getCurrentRoom().getNextRooms().contains(room);
             }
         }
         return false;

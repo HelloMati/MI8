@@ -122,6 +122,7 @@ public class DataLoader implements ApplicationRunner {
 
         //adding path to the Lobby
         roomServices.addRoom(lobby,"elevator");
+        roomServices.addRoom(lobby,"plaza");
         roomRepo.save(lobby);
 
         //adding path to the Elevator
