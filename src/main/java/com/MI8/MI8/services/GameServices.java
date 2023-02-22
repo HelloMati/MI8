@@ -4,6 +4,7 @@ import com.MI8.MI8.models.Game;
 import com.MI8.MI8.models.Player;
 import com.MI8.MI8.models.Room;
 import com.MI8.MI8.repositories.GameRepository;
+import com.MI8.MI8.repositories.ItemRepository;
 import com.MI8.MI8.repositories.PlayerRepository;
 import com.MI8.MI8.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class GameServices {
     PlayerRepository playerRepo;
     @Autowired
     RoomRepository roomRepo;
+
+    @Autowired
+    ItemRepository itemRepository;
+
 
     //makes a new game
     public String makeNewGame(int player_id){
@@ -49,10 +54,12 @@ public class GameServices {
             return new ResponseEntity<>(roomEntering.getFirstEntranceMessage(), HttpStatus.OK);
         }
     }
-    public ResponseEntity<Boolean> hasPlayerWon(int gameId) {
-        Game currentGame = ...
-        return new ResponseEntity<>(currentGame.isPlayerHasWon(), HttpStatus.OK);
+
+    public void winningCondition (Game game){
+        if (game.getCurrentRoom().getRoomName().equals("extraction") && (
+                game.getCharacter().getInventory().contains(itemRepository.findByName("laptop"))
+        || game.getCharacter().getInventory().contains(itemRepository.findByName("tracker")))){
+            game.setPlayerHasWon(true);
+        }
     }
-
-
 }
