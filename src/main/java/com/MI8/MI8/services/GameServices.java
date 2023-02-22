@@ -26,6 +26,7 @@ public class GameServices {
     ItemService itemService;
 
     @Autowired
+    static
     ItemRepository itemRepository;
 
 
@@ -51,9 +52,18 @@ public class GameServices {
         currentGame.setCurrentRoom(roomEntering);
         gameRepo.save(currentGame);
         ReplyDTO reply = new ReplyDTO("",roomEntering.getNextRooms(),itemService.getItemNames(currentGame));
-        if (roomEntering.getHaveEnteredRoom()){
+        GameServices.winningCondition(currentGame);
+        if (currentGame.isPlayerHasWon()){
+            reply.setReply("You have successfully managed to cripple Specter's growing criminal influence across the globe, whilst they remain at large," +
+                    " your accomplishments will get us one step closer to stopping their nefarious affairs. you'll be" +
+                    "returning to MI8 HQ for your next briefing agent.");
+            return new ResponseEntity<>(reply, HttpStatus.OK);
+
+        }
+        else if (roomEntering.getHaveEnteredRoom()){
             reply.setReply(roomEntering.getRoomDescription());
             return new ResponseEntity<>(reply, HttpStatus.OK);
+
         } else {
             roomEntering.setHaveEnteredRoom(true);
             roomRepo.save(roomEntering);
@@ -61,7 +71,7 @@ public class GameServices {
             return new ResponseEntity<>(reply, HttpStatus.OK);
         }
     }
-    public void winningCondition (Game game){
+    public static void winningCondition (Game game){
         if (game.getCurrentRoom().getRoomName().equals("extraction") && (
                 game.getCharacter().getInventory().contains(itemRepository.findByName("laptop").get())
         || game.getCharacter().getInventory().contains(itemRepository.findByName("tracker").get()))){

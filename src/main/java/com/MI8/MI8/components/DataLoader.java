@@ -79,7 +79,7 @@ public class DataLoader implements ApplicationRunner {
                         "further plotting ahead from some of the night-crew.");
         roomRepo.save(airvents);
         //room id 6
-        Room security = new Room("sexurity",
+        Room security = new Room("security",
                 "Your disguise has enabled you to get this far however be aware agent, you must act swiftly." +
                 " The security personnel will be on the lookout. We have instigated a scandal on the lower floors to detract their attention." +
                 "Retrieve one of the spare keycards and make it quick.",
@@ -105,45 +105,47 @@ public class DataLoader implements ApplicationRunner {
         roomRepo.save(ceosOffice);
         //room id 9
         Room extraction = new Room("extraction",
-                "You have successfully managed to cripple Specter's growing criminal influence across the globe, whilst they remain at large," +
-                " your accomplishments will get us one step closer to stopping their nefarious affairs. you'll be" +
-                "returning to MI8 HQ for your next briefing agent.",
+                "Get back in there agent. Your mission is not complete",
                 "This is the roof top of the Plaza. It has a helicopter pad",
                 true,
                 "You hear the helicopter which arrives to airlift you back to MI8 HQ");
 
-        //adding paths to the plaza
+        //adding paths from the plaza
         roomServices.addRoom(plaza,"lobby");
         roomRepo.save(plaza);
 
-        //adding path to the basement
+        //adding path from the basement
         roomServices.addRoom(basement,"plaza");
         roomRepo.save(basement);
 
-        //adding path to the Lobby
+        //adding path from the Lobby
         roomServices.addRoom(lobby,"elevator");
         roomServices.addRoom(lobby,"plaza");
         roomRepo.save(lobby);
 
-        //adding path to the Elevator
+        //adding path from the Elevator
         roomServices.addRoom(elevator,"security");
         roomRepo.save(elevator);
 
-        //adding path to the airvents
+        //adding path from the airvents
         roomServices.addRoom(airvents,"vault");
         roomRepo.save(airvents);
 
-        //adding path to the vaults
+        //adding path from the vaults
         roomServices.addRoom(vault,"extraction");
         roomRepo.save(vault);
 
-        //adding path to the security
+        //adding path from the security
         roomServices.addRoom(security,"elevator");
         roomRepo.save(security);
 
-        //adding path to the ceosOffice
-        roomServices.addRoom(extraction,"extracton");
-        roomServices.addRoom(security,"elevator");
+        //adding path from the ceosOffice
+        roomServices.addRoom(ceosOffice,"extraction");
+        roomRepo.save(ceosOffice);
+
+        //adding path from extraction
+        roomServices.addRoom(extraction,"ceosoffice");
+        roomServices.addRoom(extraction,"vault");
         roomRepo.save(ceosOffice);
 
 
@@ -174,7 +176,13 @@ public class DataLoader implements ApplicationRunner {
         Item eyes = new Item("eyes","these are your eyes, you ues them to look around.","Common");
         itemService.addRoom(eyes,plaza);
         itemService.addRoom(eyes,basement);
+        itemService.addRoom(eyes,lobby);
+        itemService.addRoom(eyes,elevator);
         itemService.addRoom(eyes,airvents);
+        itemService.addRoom(eyes,security);
+        itemService.addRoom(eyes,vault);
+        itemService.addRoom(eyes,ceosOffice);
+        itemService.addRoom(eyes,extraction);
         itemRepo.save(eyes);
 
         //item id 6

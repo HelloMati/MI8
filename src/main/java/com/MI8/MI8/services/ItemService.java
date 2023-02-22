@@ -80,6 +80,8 @@ public class ItemService {
                 }
                 if (roomIn.getId() == 1) { //if in plaza add route to basement
                     roomServices.addRoom(roomIn, "basement");
+                } else if (roomIn.getRoomName().equals("elevator")) {
+                    roomServices.addRoom(roomIn, "basement");
                 } else if (roomIn.getId() == 2) { //if in basement get multitool
                     playerServices.updateInventory(playerId, "multiTool", true);
                 } else if (roomIn.getId() == 6) { //if in security room get the keycard
