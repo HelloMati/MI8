@@ -73,12 +73,12 @@ public class GameController {
 
     //progress game - go to next room
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<Room> moveRoom(@PathVariable int id,
+    public ResponseEntity<String> moveRoom(@PathVariable int id,
                                          @RequestParam int roomId){
         if (roomServices.canMoveToRoom(id,roomId)){
-            return new ResponseEntity<>(gameServices.updateRoom(id,roomId),HttpStatus.OK);
+            return gameServices.updateRoom(id,roomId);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("You cannot move there.", HttpStatus.BAD_REQUEST);
         }
     }
 
