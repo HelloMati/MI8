@@ -50,7 +50,7 @@ public class DataLoader implements ApplicationRunner {
                         "grate leading to the building's air-conditioning system.");
         roomRepo.save(basement);
         //room id 3
-        Room lobby = new Room("You enter the lobby there is a reception desk with a bored looking receptionist." +
+        Room lobby = new Room("You enter the Lobby there is a reception desk with a bored looking receptionist." +
                 "\nBy the elevators you see some guards.",
                 "You return to the Lobby, nothing has changed in here",
                 true,
@@ -63,26 +63,26 @@ public class DataLoader implements ApplicationRunner {
                 "for the CEO's Office. choose wisely agent.",
                 "You return to the elevator, you can choose to go to the Lobby, Security Station or the CEO's office",
                 true,
-                "The calming decor and soothing music doesn't seem to do much for your nerves agent, you see nothing of use besides the floor numbers" +
-                "it would be wise to either use the elevator hatch, or proceed to the security station, or CEO's office.");
+                "The calming decor and soothing music doesn't seem to do much for your nerves agent, you see nothing of use besides the floor numbers." +
+                "It would be wise to either use the elevator hatch, or proceed to the Security Station, or CEO's office.");
         roomRepo.save(elevator);
         //room id 5
         Room airvents = new Room("You slither along the dark and narrow access vents ,avoiding any unwanted attention.",
                 "These are the airvents",
                 true,
-                "You navigate the vents and narrowly avoid a deadly fall into the large industrial fans. you keep your cool.You overhear hints and suggestions of " +
+                "You navigate the vents and narrowly avoid a deadly fall into the large industrial fans. You keep your cool. You overhear hints and suggestions of " +
                         "further plotting ahead from some of the night-crew.");
         roomRepo.save(airvents);
         //room id 6
         Room security = new Room("Your disguise has enabled you to get this far however be aware agent, you must act swiftly." +
                 " The security personnel will be on the lookout. We have instigated a scandal on the lower floors to detract their attention." +
-                "retrieve one of the spare keycards and make it quick.",
-                "You return to the security room, there is nothing left of interest here",
+                "Retrieve one of the spare keycards and make it quick.",
+                "You return to the Security room, there is nothing left of interest here",
                 true,
                 "You retrieve the keycard as the guards quickly rush down to sort out all of the commotion on the ground floor.");
         roomRepo.save(security);
         //room id 7
-        Room vault = new Room("Well done agent, the tracker you have placed on their criminal earnings will allow use to intercept" +
+        Room vault = new Room("Well done agent, the tracker you have placed on their criminal earnings will allow us to intercept" +
                 " their operation when they least expect it, catching them red handed. We have set up an extraction point. Great work agent.",
                 "You return to the vault, there is nothing left",
                 true,
@@ -91,7 +91,7 @@ public class DataLoader implements ApplicationRunner {
         //room id 8
         Room ceosOffice = new Room("Quickly agent, access the computer and retrieve the laptop. We need the documents within as evidence of Specter's" +
                 " unscrupulous and opportunistic dealings. we have set up an extraction point. Great work agent.",
-                "You return to the ceo's office. There is a gold statue and large painting of the CEO behind a grand desk. This looks rather extravagant.",
+                "You return to the CEO's office. There is a gold statue and large painting of the CEO behind a grand desk. This looks rather extravagant.",
                 true,
                 "You spot the computer on the CEO's desk. You access top secret files that will take down Spectre's criminal enterprise and take the laptop with you");
         roomRepo.save(ceosOffice);
