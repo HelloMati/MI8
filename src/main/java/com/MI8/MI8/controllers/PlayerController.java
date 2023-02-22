@@ -20,10 +20,14 @@ public class PlayerController {
     ItemService itemService;
 
     @PostMapping
-    public ResponseEntity<Player> createNewPlayer(@RequestParam String name) {
+    public ResponseEntity<String> createNewPlayer(@RequestParam String name) {
         Player player = playerService.createPlayerCharacter(name);
         playerService.updateInventory(player.getId(), "eyes", true);
-        return new ResponseEntity<>(player, HttpStatus.CREATED);
+        return new ResponseEntity<>("Good evening agent " + player.getName() + ". Your destination will be in Singapore," +
+                " within the inonic Marina Bay Sands. Your target is Specter, the infamous global crime syndicate. We have" +
+                " reason to believe they have taken up residency in the building and your mission objective is to cripple" +
+                " their operations. You will be dropped outside the building and will have to make your own way in and figure out" +
+                " a way to bring them down. Good luck agent " + player.getName() + ", we are counting on you.",HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{id}")

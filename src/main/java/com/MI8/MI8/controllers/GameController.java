@@ -50,7 +50,7 @@ public class GameController {
 
     //creates a game which is tied to a player Id
     @PostMapping(value = "/{player_id}")
-    public ResponseEntity<Game> createNewGame(@PathVariable int player_id ){
+    public ResponseEntity<String> createNewGame(@PathVariable int player_id ){
         if (playerRepo.findById(player_id).isPresent() && !playerRepo.findById(player_id).get().isStartedGame()) {
             return new ResponseEntity(gameServices.makeNewGame(player_id), HttpStatus.CREATED);
         } else if(playerRepo.findById(player_id).get().isStartedGame()) {

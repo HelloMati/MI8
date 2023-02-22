@@ -22,16 +22,17 @@ public class GameServices {
     RoomRepository roomRepo;
 
     //makes a new game
-    public Game makeNewGame(int player_id){
+    public String makeNewGame(int player_id){
         Game game = new Game();
         Player player = playerRepo.findById(player_id).get();
         game.setCurrentRoom(roomRepo.findById(1).get());
         game.setCharacter(player);
         player.setGame(game);
         player.setStartedGame(true);
+        game.getCurrentRoom().setHaveEnteredRoom(true);
         gameRepo.save(game);
         playerRepo.save(player);
-        return game;
+        return game.getCurrentRoom().getFirstEntranceMessage();
     }
 
     //updates room for a game
