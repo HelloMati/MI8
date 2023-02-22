@@ -37,7 +37,7 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         //room id 1
-        Room plaza = new Room("You are droped of at the Plaza outside the building. \nIn front of you is the front door",
+        Room plaza = new Room("You are dropped off at the Plaza outside the building. \nIn front of you is the front door",
                 "You enter the Plaza, it seems quiet out here",
                 true,
                 "You scope out around the Plaza and find a hatch which appears to lead down into the basement.");
@@ -104,7 +104,6 @@ public class DataLoader implements ApplicationRunner {
                 "You hear the helicopter which arrives to airlift you back to MI8 HQ");
 
         //adding path to the plaza
-        roomServices.addRoom(plaza,2);
         roomServices.addRoom(plaza,3);
         roomRepo.save(plaza);
 

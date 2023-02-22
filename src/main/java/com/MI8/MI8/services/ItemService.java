@@ -42,7 +42,7 @@ public class ItemService {
     //do the thing for each item
         //use the item
         //remove the item
-    public Room useItem(int roomId, String name,int playerId){
+    public Room useItem(int roomId, String name,int playerId) {
         //get player
         Player player = playerRepo.findById(playerId).orElse(null);
         //retrieve item
@@ -56,7 +56,7 @@ public class ItemService {
         //does the item exist?
         //does the player exist?
         //are we in the right room?
-        boolean areWeInTheRightRoom = (room==roomIn);
+        boolean areWeInTheRightRoom = (room == roomIn);
         //can item be used in room?
         boolean canItemBeUsed = itemToUse.getRoomCanBeUsedIn().contains(roomIn);
         //check player has item
@@ -72,13 +72,19 @@ public class ItemService {
                     return roomIn;
                 case "eyes":
                     //scans room
-                    roomServices.addRoom(roomIn, 1);
-                    roomServices.addRoom(roomIn, 2);
-                    roomServices.addRoom(roomIn, 5);
+                    if (roomIn.getId() == 1) {
+                        roomServices.addRoom(roomIn, 2);
+                    } else if (roomIn.getId() == 2) {
+                        playerServices.updateInventory(playerId, itemRepo.findIdByName("multiTool").get(), true);
+                    } else if (roomIn.getId() == 6) {
+                        playerServices.updateInventory(playerId, itemRepo.findIdByName("keycard").get(), true);
+                    } else if (roomIn.getId() == 8) {
+                        playerServices.updateInventory(playerId, itemRepo.findIdByName("laptop").get(), true);
+                    }
                     return roomIn;
                 case "multiTool":
                     //check the room is lit to use
-                    if(roomIn.isLit()) {
+                    if (roomIn.isLit()) {
                         //remove screws of vent - adds link from basement to vents
                         roomServices.addRoom(roomIn, 5);
                         roomRepo.save(roomIn);
@@ -93,8 +99,7 @@ public class ItemService {
                     return roomIn;
             }
         }
-    return null;
+        return null;
+
     }
-
-
 }

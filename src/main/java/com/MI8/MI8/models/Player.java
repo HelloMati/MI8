@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,6 +34,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        this.inventory = new ArrayList<>();
     }
 
     public Player() {
