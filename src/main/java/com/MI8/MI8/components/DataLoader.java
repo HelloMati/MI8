@@ -62,7 +62,8 @@ public class DataLoader implements ApplicationRunner {
                 "ensured this hatch will be loose enough for your access. Alternatively you can access the Security station or head straight " +
                 "for the CEO's Office. choose wisely agent.",
                 "You return to the elevator, you can choose to go to the Lobby, Security Station or the CEO's office",
-                true,"The calming decor and soothing music doesn't seem to do much for your nerves agent, you see nothing of use besides the floor numbers" +
+                true,
+                "The calming decor and soothing music doesn't seem to do much for your nerves agent, you see nothing of use besides the floor numbers" +
                 "it would be wise to either use the elevator hatch, or proceed to the security station, or CEO's office.");
         roomRepo.save(elevator);
         //room id 5
@@ -139,28 +140,33 @@ public class DataLoader implements ApplicationRunner {
 
 
         //items
+        //item id 1
         Item torch = new Item("torch","This is a torch, you can use it to light up the room","Common");
         itemService.addRoom(torch,basement);
         itemService.addRoom(torch,airvents);
         itemRepo.save(torch);
 
+        //item id 2
         Item multiTool = new Item("multiTool", "This is a Multi-Tool, you can use it to remove screws","Common");
         itemService.addRoom(multiTool,basement);
         itemRepo.save(multiTool);
 
+        //item id 3
         Item keycard = new Item("keycard","This keycard allows you to gain access to the CeosOffice.","rare");
         itemService.addRoom(keycard,ceosOffice);
         itemService.addRoom(keycard,elevator);
         itemRepo.save(keycard);
 
-
+        //item id 4
         Item laptop = new Item ("laptop","Contains evidence of Specters villainous international operations.", "superRare");
         itemRepo.save(laptop);
 
+        //item id 5
         Item eyes = new Item("eyes","these are your eyes, you ues them to look around.","Common");
         itemService.addRoom(eyes,plaza);
         itemService.addRoom(eyes,basement);
         itemService.addRoom(eyes,airvents);
+        itemRepo.save(eyes);
 
 
 
