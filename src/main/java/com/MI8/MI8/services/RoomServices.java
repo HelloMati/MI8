@@ -1,8 +1,10 @@
 package com.MI8.MI8.services;
 
 import com.MI8.MI8.models.Game;
+import com.MI8.MI8.models.Player;
 import com.MI8.MI8.models.Room;
 import com.MI8.MI8.repositories.GameRepository;
+import com.MI8.MI8.repositories.PlayerRepository;
 import com.MI8.MI8.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class RoomServices {
     RoomRepository roomRepository;
     @Autowired
     GameRepository gameRepo;
+
+    @Autowired
+    PlayerRepository playerRepository;
 
     //add next rooms on
     public void addRoom(Room room, String roomName){
@@ -39,7 +44,5 @@ public class RoomServices {
         }
         return false;
     }
-
-
 
 }
