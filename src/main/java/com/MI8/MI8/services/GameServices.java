@@ -54,6 +54,8 @@ public class GameServices {
             return new ResponseEntity<>(roomEntering.getFirstEntranceMessage(), HttpStatus.OK);
         }
     }
+<<<<<<< HEAD
+=======
 
     public void winningCondition (Game game){
         if (game.getCurrentRoom().getRoomName().equals("extraction") && (
@@ -62,4 +64,5 @@ public class GameServices {
             game.setPlayerHasWon(true);
         }
     }
+>>>>>>> f07b4d505f775ca9b04d4f3471ee233b9c0b13ef
 }
