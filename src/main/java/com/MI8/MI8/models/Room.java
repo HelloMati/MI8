@@ -1,8 +1,11 @@
 package com.MI8.MI8.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.hibernate.type.descriptor.jdbc.NVarcharJdbcType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,18 +16,47 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(length = 512)
+    private String firstEntranceMessage;
     @Column
     private String RoomDescription;
+    @Column
+    private Boolean haveEnteredRoom;
+    @Column
+    private String searchRoomMessage;
 
     @OneToOne(mappedBy = "currentRoom")
-    @JsonIgnoreProperties(value = "currentRoom")
+    @JsonIgnore
     private Game game;
 
-    public Room(String roomDescription) {
+    @Column
+    private List<Integer> nextRoomIds;
+
+    @Column
+    private boolean lit;
+
+    @ManyToMany(mappedBy = "roomCanBeUsedIn")
+    @JsonIgnore
+    private List<Item> itemsCanBeUsedHere;
+
+    public Room(String firstEntranceMessage,String roomDescription,boolean lit,String searchRoomMessage) {
         RoomDescription = roomDescription;
+        this.searchRoomMessage = searchRoomMessage;
+        this.firstEntranceMessage = firstEntranceMessage;
+        this.nextRoomIds = new ArrayList<>();
+        this.lit = lit;
+        this.haveEnteredRoom = false;
     }
 
     public Room() {
+    }
+
+    public List<Integer> getNextRooms() {
+        return nextRoomIds;
+    }
+
+    public void setNextRooms(List<Integer> nextRooms) {
+        this.nextRoomIds = nextRooms;
     }
 
     public int getId() {
@@ -51,4 +83,53 @@ public class Room {
     public void setGame(Game game) {
         this.game = game;
     }
+
+    public String getFirstEntranceMessage() {
+        return firstEntranceMessage;
+    }
+
+    public void setFirstEntranceMessage(String firstEntranceMessage) {
+        this.firstEntranceMessage = firstEntranceMessage;
+    }
+
+    public Boolean getHaveEnteredRoom() {
+        return haveEnteredRoom;
+    }
+
+    public void setHaveEnteredRoom(Boolean haveEnteredRoom) {
+        this.haveEnteredRoom = haveEnteredRoom;
+    }
+
+    public List<Integer> getNextRoomIds() {
+        return nextRoomIds;
+    }
+
+    public void setNextRoomIds(List<Integer> nextRoomIds) {
+        this.nextRoomIds = nextRoomIds;
+    }
+
+    public boolean isLit() {
+        return lit;
+    }
+
+    public void setLit(boolean lit) {
+        this.lit = lit;
+    }
+
+    public List<Item> getItemsCanBeUsedHere() {
+        return itemsCanBeUsedHere;
+    }
+
+    public void setItemsCanBeUsedHere(List<Item> itemsCanBeUsedHere) {
+        this.itemsCanBeUsedHere = itemsCanBeUsedHere;
+    }
+
+    public String getSearchRoomMessage() {
+        return searchRoomMessage;
+    }
+
+    public void setSearchRoomMessage(String searchRoomMessage) {
+        this.searchRoomMessage = searchRoomMessage;
+    }
+
 }

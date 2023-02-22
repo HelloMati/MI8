@@ -1,28 +1,64 @@
 package com.MI8.MI8.services;
 
+import com.MI8.MI8.models.Item;
 import com.MI8.MI8.models.Player;
-import com.MI8.MI8.repositories.PlayerCharacterRepository;
+import com.MI8.MI8.repositories.ItemRepository;
+import com.MI8.MI8.repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PlayerServices {
 
     @Autowired
-    PlayerCharacterRepository playerCharacterRepository;
+    PlayerRepository playerRepo;
+    @Autowired
+    ItemRepository itemRepo;
 
     public Player createPlayerCharacter(String name) {
         Player player = new Player(name);
-        playerCharacterRepository.save(player);
+        playerRepo.save(player);
         return player;
     }
 
-    public PlayerCharacter getCharacter(int id){
-        return playerCharacterRepository.findById(id).get();
+    public Player getCharacter(int id) {
+        return playerRepo.findById(id).orElse(null);
     }
 
-    public void deletePlayerCharacter(Player player) {
-        playerCharacterRepository.delete(player);
+    public void deletePlayer(int id) {
+        Player player = playerRepo.findById(id).orElse(null);
+        if (player != null) {
+            playerRepo.delete(player);
+        }
     }
 
+    public Player updatePlayer(int id, Player newPlayer) {
+        Player player = playerRepo.findById(id).orElse(null);
+        if (player != null) {
+            player.setName(newPlayer.getName());
+            playerRepo.save(player);
+        }
+        return player;
+    }
+
+    public Player updateInventory(int playerId,String itemId,boolean addOrRemove){
+        Player player = playerRepo.findById(playerId).orElse(null);
+        Item item = itemRepo.findByName(itemId).orElse(null);
+        if(item != null && player != null && addOrRemove){
+            List<Item> inventory = player.getInventory();
+            inventory.add(item);
+            player.setInventory(inventory);
+            playerRepo.save(player);
+            return player;
+        } else if (item != null && player != null && !addOrRemove) {
+            List<Item> inventory = player.getInventory();
+            inventory.remove(item);
+            player.setInventory(inventory);
+            playerRepo.save(player);
+            return player;
+        }
+        return null;
+    }
 }
