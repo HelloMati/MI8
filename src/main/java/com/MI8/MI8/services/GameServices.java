@@ -22,28 +22,31 @@ public class GameServices {
     RoomRepository roomRepo;
 
     //makes a new game
-    public Game makeNewGame(int player_id){
+    public String makeNewGame(int player_id){
         Game game = new Game();
         Player player = playerRepo.findById(player_id).get();
         game.setCurrentRoom(roomRepo.findById(1).get());
         game.setCharacter(player);
         player.setGame(game);
         player.setStartedGame(true);
+        game.getCurrentRoom().setHaveEnteredRoom(true);
         gameRepo.save(game);
         playerRepo.save(player);
-        return game;
+        return game.getCurrentRoom().getFirstEntranceMessage();
     }
 
     //updates room for a game
-    public ResponseEntity<String> updateRoom(int gameId, int roomId){
-        Game gameToUpdate = gameRepo.findById(gameId).get();
-        Room roomToUpdate = roomRepo.findById(roomId).get();
-        gameToUpdate.setCurrentRoom(roomToUpdate);
-        gameRepo.save(gameToUpdate);
-        if (roomToUpdate.getHaveEnteredRoom()){
-            return new ResponseEntity<>(roomToUpdate.getRoomDescription(), HttpStatus.OK);
+    public ResponseEntity<String> enterRoom(int gameId, String room){
+        Game currentGame = gameRepo.findById(gameId).get();
+        Room roomEntering = roomRepo.findByRoomName(room).get();
+        currentGame.setCurrentRoom(roomEntering);
+        gameRepo.save(currentGame);
+        if (roomEntering.getHaveEnteredRoom()){
+            return new ResponseEntity<>(roomEntering.getRoomDescription(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(roomToUpdate.getFirstEntranceMessage(), HttpStatus.OK);
+            roomEntering.setHaveEnteredRoom(true);
+            roomRepo.save(roomEntering);
+            return new ResponseEntity<>(roomEntering.getFirstEntranceMessage(), HttpStatus.OK);
         }
     }
 }

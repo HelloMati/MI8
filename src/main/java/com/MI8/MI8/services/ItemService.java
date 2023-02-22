@@ -76,13 +76,13 @@ public class ItemService {
                 if(!roomIn.isLit()){
                     return new ResponseEntity<>("It is too dark, you cannot see",HttpStatus.OK);
                 }
-                if (roomIn.getId() == 1) {
-                    roomServices.addRoom(roomIn, 2);
-                } else if (roomIn.getId() == 2) {
+                if (roomIn.getId() == 1) { //if in plaza add route to basement
+                    roomServices.addRoom(roomIn, "basement");
+                } else if (roomIn.getId() == 2) { //if in basement get multitool
                     playerServices.updateInventory(playerId, "multiTool", true);
-                } else if (roomIn.getId() == 6) {
+                } else if (roomIn.getId() == 6) { //if in security room get the keycard
                     playerServices.updateInventory(playerId, "keycard", true);
-                } else if (roomIn.getId() == 8) {
+                } else if (roomIn.getId() == 8) { //if in ceo's office get laptop
                     playerServices.updateInventory(playerId, "laptop", true);
                 }
                 return new ResponseEntity<>(roomIn.getSearchRoomMessage(),HttpStatus.OK);
@@ -90,7 +90,7 @@ public class ItemService {
                 //check the room is lit to use
                 if (roomIn.isLit()) {
                     //remove screws of vent - adds link from basement to vents
-                    roomServices.addRoom(roomIn, 5);
+                    roomServices.addRoom(roomIn, "airvents");
                     roomRepo.save(roomIn);
                     //remove key
                     playerServices.updateInventory(playerId, "multiTool", false);
@@ -99,7 +99,7 @@ public class ItemService {
                     return new ResponseEntity<>("It is too dark you cannot see",HttpStatus.OK);
                 }
             case "keycard":
-                roomServices.addRoom(roomIn, 8);
+                roomServices.addRoom(roomIn, "ceosoffice");
                 return new ResponseEntity<>("You insert the keycard and the button for the CEO's office lights up.",HttpStatus.OK);
         }
         return new ResponseEntity<>("error",HttpStatus.BAD_REQUEST);
