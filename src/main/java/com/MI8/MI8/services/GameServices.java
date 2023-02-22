@@ -2,6 +2,7 @@ package com.MI8.MI8.services;
 
 import com.MI8.MI8.models.Game;
 import com.MI8.MI8.models.Player;
+import com.MI8.MI8.models.ReplyDTO;
 import com.MI8.MI8.models.Room;
 import com.MI8.MI8.repositories.GameRepository;
 import com.MI8.MI8.repositories.PlayerRepository;
@@ -20,9 +21,11 @@ public class GameServices {
     PlayerRepository playerRepo;
     @Autowired
     RoomRepository roomRepo;
+    @Autowired
+    ItemService itemService;
 
     //makes a new game
-    public String makeNewGame(int player_id){
+    public ReplyDTO makeNewGame(int player_id){
         Game game = new Game();
         Player player = playerRepo.findById(player_id).get();
         game.setCurrentRoom(roomRepo.findById(1).get());
@@ -32,21 +35,25 @@ public class GameServices {
         game.getCurrentRoom().setHaveEnteredRoom(true);
         gameRepo.save(game);
         playerRepo.save(player);
-        return game.getCurrentRoom().getFirstEntranceMessage();
+        ReplyDTO reply = new ReplyDTO(game.getCurrentRoom().getFirstEntranceMessage(),game.getCurrentRoom().getNextRooms(),itemService.getItemNames(game));
+        return reply;
     }
 
     //updates room for a game
-    public ResponseEntity<String> enterRoom(int gameId, String room){
+    public ResponseEntity<ReplyDTO> enterRoom(int gameId, String room){
         Game currentGame = gameRepo.findById(gameId).get();
         Room roomEntering = roomRepo.findByRoomName(room).get();
         currentGame.setCurrentRoom(roomEntering);
         gameRepo.save(currentGame);
+        ReplyDTO reply = new ReplyDTO("",roomEntering.getNextRooms(),itemService.getItemNames(currentGame));
         if (roomEntering.getHaveEnteredRoom()){
-            return new ResponseEntity<>(roomEntering.getRoomDescription(), HttpStatus.OK);
+            reply.setReply(roomEntering.getRoomDescription());
+            return new ResponseEntity<>(reply, HttpStatus.OK);
         } else {
             roomEntering.setHaveEnteredRoom(true);
             roomRepo.save(roomEntering);
-            return new ResponseEntity<>(roomEntering.getFirstEntranceMessage(), HttpStatus.OK);
+            reply.setReply(roomEntering.getFirstEntranceMessage());
+            return new ResponseEntity<>(reply, HttpStatus.OK);
         }
     }
 }

@@ -5,6 +5,8 @@ import com.MI8.MI8.models.Player;
 import com.MI8.MI8.repositories.ItemRepository;
 import com.MI8.MI8.repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,8 +25,13 @@ public class PlayerServices {
         return player;
     }
 
-    public Player getCharacter(int id) {
-        return playerRepo.findById(id).orElse(null);
+    public ResponseEntity<Player> getCharacter(int id) {
+        Player player = playerRepo.findById(id).orElse(null);
+        if(player == null){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(player,HttpStatus.FOUND);
+        }
     }
 
     public void deletePlayer(int id) {
