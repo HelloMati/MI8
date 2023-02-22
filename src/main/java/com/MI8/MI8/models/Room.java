@@ -15,7 +15,8 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Column
+    private String roomName;
     @Column(length = 512)
     private String firstEntranceMessage;
     @Column
@@ -30,7 +31,7 @@ public class Room {
     private Game game;
 
     @Column
-    private List<Integer> nextRoomIds;
+    private List<String> nextRooms;
 
     @Column
     private boolean lit;
@@ -39,24 +40,17 @@ public class Room {
     @JsonIgnore
     private List<Item> itemsCanBeUsedHere;
 
-    public Room(String firstEntranceMessage,String roomDescription,boolean lit,String searchRoomMessage) {
+    public Room(String name,String firstEntranceMessage,String roomDescription,boolean lit,String searchRoomMessage) {
         RoomDescription = roomDescription;
+        this.roomName = name;
         this.searchRoomMessage = searchRoomMessage;
         this.firstEntranceMessage = firstEntranceMessage;
-        this.nextRoomIds = new ArrayList<>();
+        this.nextRooms = new ArrayList<>();
         this.lit = lit;
         this.haveEnteredRoom = false;
     }
 
     public Room() {
-    }
-
-    public List<Integer> getNextRooms() {
-        return nextRoomIds;
-    }
-
-    public void setNextRooms(List<Integer> nextRooms) {
-        this.nextRoomIds = nextRooms;
     }
 
     public int getId() {
@@ -67,21 +61,12 @@ public class Room {
         this.id = id;
     }
 
-    public String getRoomDescription() {
-        return RoomDescription;
+    public String getRoomName() {
+        return roomName;
     }
 
-    public void setRoomDescription(String roomDescription) {
-        RoomDescription = roomDescription;
-    }
-
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public String getFirstEntranceMessage() {
@@ -92,6 +77,14 @@ public class Room {
         this.firstEntranceMessage = firstEntranceMessage;
     }
 
+    public String getRoomDescription() {
+        return RoomDescription;
+    }
+
+    public void setRoomDescription(String roomDescription) {
+        RoomDescription = roomDescription;
+    }
+
     public Boolean getHaveEnteredRoom() {
         return haveEnteredRoom;
     }
@@ -100,12 +93,28 @@ public class Room {
         this.haveEnteredRoom = haveEnteredRoom;
     }
 
-    public List<Integer> getNextRoomIds() {
-        return nextRoomIds;
+    public String getSearchRoomMessage() {
+        return searchRoomMessage;
     }
 
-    public void setNextRoomIds(List<Integer> nextRoomIds) {
-        this.nextRoomIds = nextRoomIds;
+    public void setSearchRoomMessage(String searchRoomMessage) {
+        this.searchRoomMessage = searchRoomMessage;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public List<String> getNextRooms() {
+        return nextRooms;
+    }
+
+    public void setNextRooms(List<String> nextRooms) {
+        this.nextRooms = nextRooms;
     }
 
     public boolean isLit() {
@@ -123,13 +132,4 @@ public class Room {
     public void setItemsCanBeUsedHere(List<Item> itemsCanBeUsedHere) {
         this.itemsCanBeUsedHere = itemsCanBeUsedHere;
     }
-
-    public String getSearchRoomMessage() {
-        return searchRoomMessage;
-    }
-
-    public void setSearchRoomMessage(String searchRoomMessage) {
-        this.searchRoomMessage = searchRoomMessage;
-    }
-
 }

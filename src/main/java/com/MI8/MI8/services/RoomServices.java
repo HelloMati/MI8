@@ -21,9 +21,9 @@ public class RoomServices {
     GameRepository gameRepo;
 
     //add next rooms on
-    public void addRoom(Room room, Integer roomID){
-        List<Integer> nextRooms = room.getNextRooms();
-        nextRooms.add(roomID);
+    public void addRoom(Room room, String roomName){
+        List<String> nextRooms = room.getNextRooms();
+        nextRooms.add(roomName);
         room.setNextRooms(nextRooms);
         roomRepository.save(room);
     }
