@@ -177,6 +177,10 @@ public class DataLoader implements ApplicationRunner {
         itemService.addRoom(eyes,airvents);
         itemRepo.save(eyes);
 
+        //item id 6
+        Item tracker = new Item("tracker","This is the key to the tracker you hid in the vault","superRare");
+        itemRepo.save(tracker);
+
 
 
     }
