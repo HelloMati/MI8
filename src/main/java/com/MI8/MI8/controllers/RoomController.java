@@ -18,11 +18,12 @@ public class RoomController {
     @Autowired
     ItemService itemService;
 
-    @PatchMapping(value="/{id}/{player_id}")
-    public ResponseEntity<Room> useItem(@PathVariable int id,
-                                        @PathVariable int player_id,
-                                        @RequestParam String itemName){
-        Room room = itemService.useItem(id,itemName,player_id);
-        return new ResponseEntity<>(room, HttpStatus.OK);
-    }
+    // moving this to player controller
+//    @PatchMapping(value="/{id}/{player_id}")
+//    public ResponseEntity<Room> useItem(@PathVariable int id,
+//                                        @PathVariable int player_id,
+//                                        @RequestParam String itemName){
+//        Room room = itemService.useItem(id,itemName,player_id);
+//        return new ResponseEntity<>(room, HttpStatus.OK);
+//    }
 }

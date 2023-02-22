@@ -7,6 +7,8 @@ import com.MI8.MI8.repositories.GameRepository;
 import com.MI8.MI8.repositories.PlayerRepository;
 import com.MI8.MI8.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,11 +35,15 @@ public class GameServices {
     }
 
     //updates room for a game
-    public Room updateRoom(int gameId,int roomId){
+    public ResponseEntity<String> updateRoom(int gameId, int roomId){
         Game gameToUpdate = gameRepo.findById(gameId).get();
         Room roomToUpdate = roomRepo.findById(roomId).get();
         gameToUpdate.setCurrentRoom(roomToUpdate);
         gameRepo.save(gameToUpdate);
-        return roomToUpdate;
+        if (roomToUpdate.getHaveEnteredRoom()){
+            return new ResponseEntity<>(roomToUpdate.getRoomDescription(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(roomToUpdate.getFirstEntranceMessage(), HttpStatus.OK);
+        }
     }
 }

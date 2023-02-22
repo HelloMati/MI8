@@ -16,6 +16,7 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
+
     @Column
     protected String name;
 

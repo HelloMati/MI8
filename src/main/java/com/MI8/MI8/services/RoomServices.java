@@ -25,6 +25,7 @@ public class RoomServices {
         List<Integer> nextRooms = room.getNextRooms();
         nextRooms.add(roomID);
         room.setNextRooms(nextRooms);
+        roomRepository.save(room);
     }
 
     //check if you can move to the selected room

@@ -43,9 +43,9 @@ public class PlayerServices {
         return player;
     }
 
-    public Player updateInventory(int playerId,int itemId,boolean addOrRemove){
+    public Player updateInventory(int playerId,String itemId,boolean addOrRemove){
         Player player = playerRepo.findById(playerId).orElse(null);
-        Item item = itemRepo.findById(itemId).orElse(null);
+        Item item = itemRepo.findByName(itemId).orElse(null);
         if(item != null && player != null && addOrRemove){
             List<Item> inventory = player.getInventory();
             inventory.add(item);
