@@ -26,9 +26,6 @@ public class ItemService {
     @Autowired
     RoomServices roomServices;
 
-    @Autowired
-    RoomServices roomServices;
-
     //add room an item can be used in
     public void addRoom(Item item, Room room){
         List<Room> nextRooms = item.getRoomCanBeUsedIn();
