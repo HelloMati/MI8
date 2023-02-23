@@ -17,6 +17,10 @@ Our MVP was to create a server-side, back-end project with the use of the follow
 
 With the use of Springboot we set out to create an API that would consolidate the knowledge we gathered and create a game. This game sets out to contain interconnected objects as well as bespoke methods which can affect the game-state.
 
+### How-to-play
+---
+(detailed bullet point instructions)
+
 ### Screenshots
 ---
 
@@ -42,12 +46,111 @@ Our EDR diagram was crucial to understanding how data would flow from each of ou
 
 Our storyboard was a crucial step in collaboration. It helped us get a top-down perspective on how our game would work, the end-states available and the accessibility between the various rooms we needed and the pre-requisites to pass each stage.
 
-### Game-requests
+## Game Requests
+---
 
-(include end-points, request body and headers)
+There are several ways to reach the end of the game. Here is one way.
 
-### How-to-play
-(detailed bullet point instructions)
+Endpoint requests using Postman:
+
+To retrieve the current state of the game, use the following endpoint
+request:
+```
+ Endpoint: /game
+ Method: GET
+ URL: http://localhost:8080/game 
+```
+
+To create a new player with the given name, use the following endpoint request:
+```
+Endpoint: /player
+Method: POST
+URL: http://localhost:8080/player/Max
+```
+
+To create a new game with the given ID, use the following endpoint request:
+```
+Endpoint: /game/gameid
+Method: POST
+URL: http://localhost:8080/game/1
+```
+
+To update the current room of a game with the given ID, use the following endpoint request:
+```
+Endpoint: /game/gameid/room
+Method: PATCH
+URL: http://localhost:8080/game/1/lobby
+```
+
+To update a player's item with the given name, use the following endpoint request:
+```
+Endpoint: /player/playerid/itemName
+Method: PATCH
+URL: http://localhost:8080/player/1/eyes
+```
+
+To update the current room of a game with the given ID, use the following endpoint request:
+```
+Endpoint: /game/gameid/room
+Method: PATCH
+URL: http://localhost:8080/game/1/elevator
+```
+
+To update a player's item with the given name, use the following endpoint request:
+```
+Endpoint: /player/playerid/itemName
+Method: PATCH
+URL: http://localhost:8080/player/1/eyes
+```
+
+To update the current room of a game with the given ID, use the following endpoint request:
+```
+Endpoint: /game/gameid/room
+Method: PATCH
+http://localhost:8080/game/1/security
+```
+
+To update a player's item with the given name, use the following endpoint request:
+```
+Endpoint: /player/playerid/itemName
+Method: PATCH
+URL: http://localhost:8080/player/1/eyes
+```
+
+To update the current room of a game with the given ID, use the following endpoint request:
+```
+Endpoint: /game/gameid/room
+Method: PATCH
+URL: http://localhost:8080/game/1/elevator
+```
+
+To update a player's item with the given name, use the following endpoint request:
+```
+Endpoint: /player/playerid/itemName
+Method: PATCH
+URL: http://localhost:8080/player/1/keycard
+```
+
+To update the current room of a game with the given ID, use the following endpoint request:
+```
+Endpoint: /game/gameid/room
+Method: PATCH
+URL: http://localhost:8080/game/1/ceosoffice
+```
+
+To update a player's item with the given name, use the following endpoint request:
+```
+Endpoint: /player/playerid/itemName
+Method: PATCH
+URL: http://localhost:8080/player/1/eyes
+```
+
+To update the current room of a game with the given ID, use the following endpoint request:
+```
+Endpoint: /game/gameid/room
+Method: PATCH
+URL: http://localhost:8080/game/1/extraction
+```
 
 ### What we learned
 ---
