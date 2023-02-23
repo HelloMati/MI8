@@ -38,6 +38,7 @@ public class PlayerController {
     @PostMapping(value = "/{name}")
     public ResponseEntity<String> createNewPlayer(@PathVariable String name) {
         Player player = playerService.createPlayerCharacter(name);
+        playerService.updateInventory(player.getId(), "torch", true);
         playerService.updateInventory(player.getId(), "eyes", true);
         return new ResponseEntity<>("Good evening agent " + player.getName() + ". Your destination will be in Singapore," +
                 " within the inonic Marina Bay Sands. Your target is Specter, the infamous global crime syndicate. We have" +

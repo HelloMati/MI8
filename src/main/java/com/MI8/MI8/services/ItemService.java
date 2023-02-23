@@ -88,7 +88,10 @@ public class ItemService {
                     playerServices.updateInventory(playerId, "keycard", true);
                 } else if (roomIn.getId() == 8) { //if in ceo's office get laptop
                     playerServices.updateInventory(playerId, "laptop", true);
+                } else if (roomIn.getRoomName().equals("vault")) {
+                    playerServices.updateInventory(playerId, "tracker", true);
                 }
+                reply.setInventory(ItemService.getItemNames(player.getGame()));
                 reply.setReply(roomIn.getSearchRoomMessage());
                 return new ResponseEntity<>(reply,HttpStatus.OK);
             case "multiTool":
@@ -99,6 +102,7 @@ public class ItemService {
                     roomRepo.save(roomIn);
                     //remove key
                     playerServices.updateInventory(playerId, "multiTool", false);
+                    reply.setRoomsYouCanEnter(roomIn.getNextRooms());
                     reply.setReply("You use the MultiTool to remove the vent cover, you can now squeeze into the vents");
                     return new ResponseEntity<>(reply,HttpStatus.OK);
                 } else {
