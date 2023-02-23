@@ -1,9 +1,11 @@
 ## Overview
 ---
 
-Welcome to the MI8 group project. Our text based adventure will take you through a dangerous mission with a single objective, to take down an international crime syndicate.
+MI8 Text-Based Adventure Game
 
-Using our skills learnt during the first 5 weeks of our bootcamp our API will have a series of HTTP requests to help you navigate this dangerous mission, whilst showcasing our understanding of APIs, 
+Welcome to the MI8 group project. Our text based adventure will take you through a dangerous mission with a single objective: To take down an international crime syndicate.
+The player takes on the role of a spy trying to infiltrate a high-security building. The goal is to navigate through various rooms in the building, collect items, and use them to solve problems and progress to the next level.
+Using our skills learnt during the first 5 weeks of our bootcamp our API will have a series of HTTP requests to help you navigate this dangerous mission, whilst showcasing our understanding of APIs. 
 
 ### Contents
 ---
@@ -11,6 +13,8 @@ Using our skills learnt during the first 5 weeks of our bootcamp our API will ha
   - [Overview](#overview)
   - [The Challenge](#the-challenge)
   - [Screenshots](#screenshots)
+  - [Game Structure](#game-structure)
+  - [Setup](#setup)
   - [Our Process](#our-process)
   - [Game Requests](#game-requests)
   - [What we learned](#what-we-learned)
@@ -18,7 +22,7 @@ Using our skills learnt during the first 5 weeks of our bootcamp our API will ha
   - [Useful Resources](#useful-resources)
   - [Authors](#authors)
   - [Acknowledgments](#acknowledgments)
-  
+
 ### The Challenge
 ---
 Our MVP was to create a server-side, back-end project with the use of the following technologies/frameworks:
@@ -38,7 +42,18 @@ With the use of Springboot we set out to create an API that would consolidate th
 
 Above is the mission screen that is created as soon as you create a character.
 
+### Game Structure
 ---
+The game consists of various rooms in a building, and the player must navigate through them to progress. Some rooms contain items that can be collected and used to complete the mission. The player must use their wits and ingenuity to find the items and figure out how to use them to progress through the game.
+
+### Setup
+---
+To run the game, you will need to have Java and MySQL installed on your computer. Follow the steps below to set up the game:
+
+1. Clone the repository: git clone https://github.com/HelloMati/MI8.
+2. Import the project into your preferred IDE (IntelliJ, etc.).
+3. Create a MySQL database called mi8_api using createdDB mi8_api in the Terminal and update the application.properties file with your database details.
+4. Run the project by running the MI8Application.java class.
 
 ### Our Process
 ---
@@ -168,11 +183,20 @@ Method: PATCH
 URL: http://localhost:8080/game/1/extraction
 ```
 
+<<<<<<< HEAD
+=======
+This is the end of the game. 
+
+>>>>>>> 3dafd8efe678dc9052af52ed3cf95df17f2db25a
 ## What we learned
 ---
 
 Several challanges presented themselves when designing a text-based adventure game. One of them was the fact we did not have a front-end. We had to then use HTTP requests and JSON formatting to transmit our data that we wanted the user to interract with in their client.
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 3dafd8efe678dc9052af52ed3cf95df17f2db25a
 ```
 public Player updateInventory(int playerId,String itemId,boolean addOrRemove){
     Player player = playerRepo.findById(playerId).orElse(null);
