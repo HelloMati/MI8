@@ -18,20 +18,29 @@ Our MVP was to create a server-side, back-end project with the use of the follow
 With the use of Springboot we set out to create an API that would consolidate the knowledge we gathered and create a game. This game sets out to contain interconnected objects as well as bespoke methods which can affect the game-state.
 
 ### Screenshots
+---
 
 ## Our process
 ---
+Note: Our project underwent several changes as development went on, so the current diagrams are not representitive of the final product.
+
 The initial process started with narrowing down the scope of our project to an achievable MVP in the 72 hours we had.
 
 ![](mi8_diagram/mvp_and_extensions.png "mvp")
 
-we established an MVP which we succesfully achieved as well as some extensions. Those extensions were discarding items and including a mission.
+We established an MVP which we succesfully achieved as well as some extensions. Those extensions were discarding items and including a mission.
 
 ![](mi8_diagram/UML_diagram.png "UML diagram")
 
+Our UML describes our thought process and the relationships we would want the classes to have with eachother.We initially started with an "inventory" concept which we then simplified into an "item" class.
+
 ![](mi8_diagram/ERD_diagram.png "EDR diagram")
 
+Our EDR diagram was crucial to understanding how data would flow from each of our entities and revealed the necessity for a "inventory-items". This table would act as our join table, consisting of the primary keys found in "inventory" and "items".
+
 ![](mi8_diagram/Story_board.png "Story board")
+
+Our storyboard was a crucial step in collaboration. It helped us get a top-down perspective on how our game would work, the end-states available and the accessibility between the various rooms we needed and the pre-requisites to pass each stage.
 
 ### Game-requests
 
@@ -41,15 +50,50 @@ we established an MVP which we succesfully achieved as well as some extensions. 
 (detailed bullet point instructions)
 
 ### What we learned
+---
+```
+public Player updateInventory(int playerId,String itemId,boolean addOrRemove){
+    Player player = playerRepo.findById(playerId).orElse(null);
+    Item item = itemRepo.findByName(itemId).orElse(null);
+    if(item != null && player != null && addOrRemove){
+        List<Item> inventory = player.getInventory();
+        inventory.add(item);
+        player.setInventory(inventory);
+        playerRepo.save(player);
+        return player;
+    } else if (item != null && player != null && !addOrRemove) {
+        List<Item> inventory = player.getInventory();
+        inventory.remove(item);
+        player.setInventory(inventory);
+        playerRepo.save(player);
+        return player;
+    }
+    return null;
+}
+
+this segment of code updates the inventory, we advanced the code to require an 'item' to access specific rooms as a method of progression across the rooms.
+```
 
 ### Continued development
+---
+
+continued development would be the further implementations of our 'Extensions and Extra-extensions'as stated in our intial diagram, besides our MVP.
 
 ### Useful resources
+---
+
+[Excalidraw](https://excalidraw.com) - Collaboration tool.
+
+[Hitman game mission introduction](https://www.youtube.com/watch?v=gU-i-ATBsN8) - Dialogue inspiration.
 
 ## Authors
+---
 
-- James Emery
-- Forida Matin
-- Wilson Sanches
+- [James Emery](https://github.com/J-emery)
+- [Forida Matin](https://github.com/HelloMati)
+- [Wilson Sanches](https://github.com/W-Sanches94)
 
 ## Acknowledgments
+---
+
+We would like to extend our thanks to our tutors at BNTA for their time and dedication.
