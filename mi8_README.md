@@ -32,8 +32,12 @@ Our MVP was to create a server-side, back-end project with the use of the follow
 With the use of Springboot we set out to create an API that would consolidate the knowledge we gathered and create a game. This game sets out to contain interconnected objects as well as bespoke methods which can affect the game-state.
 
 ### Screenshots
+---
 
 ![](mi8_diagram/Agent_Irena.png "Mission Introduction")
+
+Above is the mission screen that is created as soon as you create a character.
+
 ---
 
 ### Our Process
