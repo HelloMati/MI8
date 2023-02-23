@@ -1,9 +1,22 @@
 package com.MI8.MI8.models;
 
+import java.util.List;
+
 public class ReplyDTO {
 
     private String reply;
-    private Item itemUsed;
+    private List<String> roomsYouCanEnter;
+    private List<String> inventory;
+
+    public ReplyDTO(String reply, List<String> roomsYouCanEnter, List<String> inventory) {
+        this.reply = reply;
+        this.roomsYouCanEnter = roomsYouCanEnter;
+        this.inventory = inventory;
+    }
+
+    public ReplyDTO(String reply) {
+        this.reply = reply;
+    }
 
     public ReplyDTO() {
     }
@@ -16,11 +29,19 @@ public class ReplyDTO {
         this.reply = reply;
     }
 
-    public Item getItem() {
-        return itemUsed;
+    public List<String> getRoomsYouCanEnter() {
+        return roomsYouCanEnter;
     }
 
-    public void setItem(Item item) {
-        this.itemUsed = item;
+    public void setRoomsYouCanEnter(List<String> roomsYouCanEnter) {
+        this.roomsYouCanEnter = roomsYouCanEnter;
+    }
+
+    public List<String> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(List<String> inventory) {
+        this.inventory = inventory;
     }
 }

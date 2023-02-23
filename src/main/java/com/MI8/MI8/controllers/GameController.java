@@ -1,6 +1,7 @@
 package com.MI8.MI8.controllers;
 
 import com.MI8.MI8.models.Game;
+import com.MI8.MI8.models.ReplyDTO;
 import com.MI8.MI8.models.Room;
 import com.MI8.MI8.repositories.GameRepository;
 import com.MI8.MI8.repositories.PlayerRepository;
@@ -50,7 +51,7 @@ public class GameController {
 
     //creates a game which is tied to a player Id
     @PostMapping(value = "/{player_id}")
-    public ResponseEntity<Game> createNewGame(@PathVariable int player_id ){
+    public ResponseEntity<ReplyDTO> createNewGame(@PathVariable int player_id ){
         if (playerRepo.findById(player_id).isPresent() && !playerRepo.findById(player_id).get().isStartedGame()) {
             return new ResponseEntity(gameServices.makeNewGame(player_id), HttpStatus.CREATED);
         } else if(playerRepo.findById(player_id).get().isStartedGame()) {
@@ -72,13 +73,13 @@ public class GameController {
     }
 
     //progress game - go to next room
-    @PatchMapping(value = "/{id}")
-    public ResponseEntity<String> moveRoom(@PathVariable int id,
-                                         @RequestParam String room){
+    @PatchMapping(value = "/{id}/{room}")
+    public ResponseEntity<ReplyDTO> moveRoom(@PathVariable int id,
+                                         @PathVariable String room){
         if (roomServices.canMoveToRoom(id,room)){
             return gameServices.enterRoom(id,room);
         } else {
-            return new ResponseEntity<>("You cannot move there.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ReplyDTO("You cannot move there"), HttpStatus.BAD_REQUEST);
         }
     }
 

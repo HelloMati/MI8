@@ -21,6 +21,9 @@ public class Game {
     @JsonIgnoreProperties({"rooms"})
     private Room currentRoom;
 
+    @Column
+    private boolean playerHasWon;
+
     public Game(int id, Player character, Room currentRoom) {
         this.id = id;
         this.player = character;
@@ -52,5 +55,13 @@ public class Game {
 
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
+    }
+
+    public boolean isPlayerHasWon() {
+        return playerHasWon;
+    }
+
+    public void setPlayerHasWon(boolean playerHasWon) {
+        this.playerHasWon = playerHasWon;
     }
 }

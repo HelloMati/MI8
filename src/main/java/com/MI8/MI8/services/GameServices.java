@@ -2,8 +2,10 @@ package com.MI8.MI8.services;
 
 import com.MI8.MI8.models.Game;
 import com.MI8.MI8.models.Player;
+import com.MI8.MI8.models.ReplyDTO;
 import com.MI8.MI8.models.Room;
 import com.MI8.MI8.repositories.GameRepository;
+import com.MI8.MI8.repositories.ItemRepository;
 import com.MI8.MI8.repositories.PlayerRepository;
 import com.MI8.MI8.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,32 +22,61 @@ public class GameServices {
     PlayerRepository playerRepo;
     @Autowired
     RoomRepository roomRepo;
+    @Autowired
+    ItemService itemService;
+
+    @Autowired
+    ItemRepository itemRepository;
+    GameServices gameServices;
+
 
     //makes a new game
-    public Game makeNewGame(int player_id){
+    public ReplyDTO makeNewGame(int player_id){
         Game game = new Game();
         Player player = playerRepo.findById(player_id).get();
         game.setCurrentRoom(roomRepo.findById(1).get());
         game.setCharacter(player);
         player.setGame(game);
         player.setStartedGame(true);
+        game.getCurrentRoom().setHaveEnteredRoom(true);
         gameRepo.save(game);
         playerRepo.save(player);
-        return game;
+        ReplyDTO reply = new ReplyDTO(game.getCurrentRoom().getFirstEntranceMessage(),game.getCurrentRoom().getNextRooms(),itemService.getItemNames(game));
+        return reply;
     }
 
     //updates room for a game
-    public ResponseEntity<String> enterRoom(int gameId, String room){
+    public ResponseEntity<ReplyDTO> enterRoom(int gameId, String room){
         Game currentGame = gameRepo.findById(gameId).get();
         Room roomEntering = roomRepo.findByRoomName(room).get();
         currentGame.setCurrentRoom(roomEntering);
         gameRepo.save(currentGame);
-        if (roomEntering.getHaveEnteredRoom()){
-            return new ResponseEntity<>(roomEntering.getRoomDescription(), HttpStatus.OK);
+        ReplyDTO reply = new ReplyDTO("",roomEntering.getNextRooms(),itemService.getItemNames(currentGame));
+        gameServices.winningCondition(currentGame);
+        if (currentGame.isPlayerHasWon()){
+            reply.setReply("You have successfully managed to cripple Specter's growing criminal influence across the globe, whilst they remain at large," +
+                    " your accomplishments will get us one step closer to stopping their nefarious affairs. you'll be" +
+                    "returning to MI8 HQ for your next briefing agent.");
+            return new ResponseEntity<>(reply, HttpStatus.OK);
+
+        }
+        else if (roomEntering.getHaveEnteredRoom()){
+            reply.setReply(roomEntering.getRoomDescription());
+            return new ResponseEntity<>(reply, HttpStatus.OK);
+
         } else {
             roomEntering.setHaveEnteredRoom(true);
             roomRepo.save(roomEntering);
-            return new ResponseEntity<>(roomEntering.getFirstEntranceMessage(), HttpStatus.OK);
+            reply.setReply(roomEntering.getFirstEntranceMessage());
+            return new ResponseEntity<>(reply, HttpStatus.OK);
         }
     }
+    public void winningCondition (Game game){
+        if (game.getCurrentRoom().getRoomName().equals("extraction") && (
+                game.getCharacter().getInventory().contains(itemRepository.findByName("laptop").get())
+        || game.getCharacter().getInventory().contains(itemRepository.findByName("tracker").get()))){
+            game.setPlayerHasWon(true);
+        }
+    }
+
 }
