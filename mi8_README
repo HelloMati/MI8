@@ -29,9 +29,18 @@ we established an MVP which we succesfully achieved as well as some extensions. 
 
 ![](mi8_diagram/UML_diagram.png "UML diagram")
 
+![](mi8_diagram/ERD_diagram.png "EDR diagram")
 
+![](mi8_diagram/Story_board.png "Story board")
 
-### What I learned
+### Game-requests
+
+(include end-points, request body and headers)
+
+### How-to-play
+(detailed bullet point instructions)
+
+### What we learned
 
 ### Continued development
 
