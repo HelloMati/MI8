@@ -26,13 +26,22 @@ public class ItemService {
     @Autowired
     RoomServices roomServices;
 
+    //returns list of items for reply DTO
+    public static List<String> getItemNames(Game game) {
+        List<Item> inventory = game.getCharacter().getInventory();
+        List<String> toReturn = new ArrayList<>();
+        for (Item item : inventory) {
+            toReturn.add(item.getItemName());
+        }
+        return toReturn;
+    }
+
     //add room an item can be used in
     public void addRoom(Item item, Room room) {
         List<Room> nextRooms = item.getRoomCanBeUsedIn();
         nextRooms.add(room);
         item.setRoomCanBeUsedIn(nextRooms);
     }
-
 
     //use item
     //switch to check what the item is
@@ -71,12 +80,12 @@ public class ItemService {
                 roomRepo.save(roomIn);
                 //drop torch
                 reply.setReply("You light up the room you are in, you can now see!");
-                return new ResponseEntity<>(reply,HttpStatus.OK);
+                return new ResponseEntity<>(reply, HttpStatus.OK);
             case "eyes":
                 //scans room
-                if(!roomIn.isLit()){
+                if (!roomIn.isLit()) {
                     reply.setReply("It is too dark, you cannot see");
-                    return new ResponseEntity<>(reply,HttpStatus.OK);
+                    return new ResponseEntity<>(reply, HttpStatus.OK);
                 }
                 if (roomIn.getId() == 1) { //if in plaza add route to basement
                     roomServices.addRoom(roomIn, "basement");
@@ -93,7 +102,7 @@ public class ItemService {
                 }
                 reply.setInventory(ItemService.getItemNames(player.getGame()));
                 reply.setReply(roomIn.getSearchRoomMessage());
-                return new ResponseEntity<>(reply,HttpStatus.OK);
+                return new ResponseEntity<>(reply, HttpStatus.OK);
             case "multiTool":
                 //check the room is lit to use
                 if (roomIn.isLit()) {
@@ -104,26 +113,16 @@ public class ItemService {
                     playerServices.updateInventory(playerId, "multiTool", false);
                     reply.setRoomsYouCanEnter(roomIn.getNextRooms());
                     reply.setReply("You use the MultiTool to remove the vent cover, you can now squeeze into the vents");
-                    return new ResponseEntity<>(reply,HttpStatus.OK);
+                    return new ResponseEntity<>(reply, HttpStatus.OK);
                 } else {
                     reply.setReply("It is too dark you cannot see");
-                    return new ResponseEntity<>(reply,HttpStatus.OK);
+                    return new ResponseEntity<>(reply, HttpStatus.OK);
                 }
             case "keycard":
                 roomServices.addRoom(roomIn, "ceosoffice");
                 reply.setReply("You insert the keycard and the button for the CEO's office lights up.");
-                return new ResponseEntity<>(reply,HttpStatus.OK);
+                return new ResponseEntity<>(reply, HttpStatus.OK);
         }
-        return new ResponseEntity<>(new ReplyDTO("error"),HttpStatus.BAD_REQUEST);
-    }
-
-    //returns list of items for reply DTO
-    public static List<String> getItemNames(Game game){
-        List<Item> inventory = game.getCharacter().getInventory();
-        List<String> toReturn = new ArrayList<>();
-        for (Item item : inventory){
-            toReturn.add(item.getItemName());
-        }
-        return toReturn;
+        return new ResponseEntity<>(new ReplyDTO("error"), HttpStatus.BAD_REQUEST);
     }
 }
